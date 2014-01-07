@@ -1,0 +1,22 @@
+{
+    "name": "annotatecms/themes",
+    "type": "annotatecms-extension",
+    "description": "Themes support for AnnotateCms framework",
+    "minimum-stability": "dev",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Michal Vyšinský",
+            "email": "vysinsky@live.com"
+        }
+    ],
+    "require" : {
+        "nette/nette" : "@dev",
+        "kdyby/events": "@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "AnnotateCms\\Themes\\": "src/"
+        }
+    }
+}
