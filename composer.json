@@ -12,11 +12,15 @@
     ],
     "require" : {
         "nette/nette" : "@dev",
-        "kdyby/events": "@dev"
+        "kdyby/events": "@dev",
+        "annotatecms/installer": "@dev"
     },
     "autoload": {
         "psr-4": {
             "AnnotateCms\\Themes\\": "src/"
         }
+    },
+    "extra": {
+        "extension-class" : "AnnotateCms\\Themes\\DI\\ThemesExtension"
     }
 }
