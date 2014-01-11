@@ -28,7 +28,7 @@ class ThemesExtension extends CompilerExtension
         $builder = $this->getContainerBuilder();
 
         $builder->addDefinition($this->prefix("themesLoader"))
-            ->setClass(ThemesLoader::CLASS);
+            ->setClass(ThemesLoader::classname);
     }
 
 

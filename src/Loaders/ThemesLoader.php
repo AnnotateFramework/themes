@@ -15,4 +15,6 @@ namespace AnnotateCms\Themes\Loaders;
  */
 class ThemesLoader {
 
+    const classname = __CLASS__;
+
 } 
