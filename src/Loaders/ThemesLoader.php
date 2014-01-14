@@ -32,6 +32,8 @@ class ThemesLoader implements Subscriber
 
     private $themes = array();
 
+    private $frontendTheme;
+
     const classname = __CLASS__;
     /** @var  Theme */
     private $activeTheme;
@@ -54,6 +56,16 @@ class ThemesLoader implements Subscriber
         }
 
         return $themes;
+    }
+
+    public function setFrontendTheme($name)
+    {
+        $this->frontendTheme = $name;
+    }
+
+    public function activateFrontendTheme()
+    {
+        $this->activeTheme = $this->themes[$this->frontendTheme];
     }
 
     private function checkDependencies(Theme $theme)
@@ -92,7 +104,7 @@ class ThemesLoader implements Subscriber
     public function onSetupTemplate(ITemplate $template)
     {
         $template->theme = $this->activeTheme;
-        $template->themeDir = $template->basePath . $this->activeTheme->getRelativeDirectory();
+        $template->themeDir = $template->basePath . "/" . $this->activeTheme->getRelativeDirectory() . "/";
     }
 
 } 
