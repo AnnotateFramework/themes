@@ -9,26 +9,20 @@
 namespace AnnotateCms\Themes\DI;
 
 
-use Nette\DI\CompilerExtension;
 use AnnotateCms\Themes\Loaders\ThemesLoader;
+use Kdyby\Events\DI\EventsExtension;
+use Nette\DI\CompilerExtension;
 
 class ThemesExtension extends CompilerExtension
 {
 
-    private $defaults = array(
-        "themesDir" => "%appDir%/themes"
-    );
-
     public function loadConfiguration()
     {
-        $config = $this->getConfig($this->defaults);
-
-        dump($config);
-
         $builder = $this->getContainerBuilder();
 
         $builder->addDefinition($this->prefix("themesLoader"))
-            ->setClass(ThemesLoader::classname);
+            ->setClass(ThemesLoader::classname)
+            ->addTag(EventsExtension::SUBSCRIBER_TAG);
     }
 
 

@@ -13,7 +13,8 @@
     "require" : {
         "nette/nette" : "@dev",
         "kdyby/events": "@dev",
-        "annotatecms/installer": "@dev"
+        "annotatecms/installer": "@dev",
+        "annotatecms/packages": "@dev"
     },
     "autoload": {
         "psr-4": {
@@ -21,6 +22,7 @@
         }
     },
     "extra": {
+        "extension-name" : "themes",
         "extension-class" : "AnnotateCms\\Themes\\DI\\ThemesExtension"
     }
 }
