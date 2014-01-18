@@ -80,8 +80,13 @@ class Theme
         $this->checked = true;
     }
 
-    public function getRelativeDirectory()
+    public function getRelativePath()
     {
         return \str_replace("\\", "/", $this->rDir);
+    }
+
+    public function getPath()
+    {
+        return $this->aDir;
     }
 }
