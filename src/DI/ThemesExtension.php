@@ -29,7 +29,8 @@ class ThemesExtension extends CompilerExtension
         $builder->addDefinition($this->prefix("themesLoader"))
             ->setClass(ThemesLoader::classname)
             ->addTag(EventsExtension::SUBSCRIBER_TAG)
-            ->addSetup("setFrontendTheme", array("name" => $config["frontend"]));
+            ->addSetup("setFrontendTheme", array("name" => $config["frontend"]))
+            ->addSetup("setBackendTheme", array("name" => $config["backend"]));
     }
 
 

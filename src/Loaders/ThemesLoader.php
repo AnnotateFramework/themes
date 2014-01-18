@@ -31,6 +31,7 @@ if (!defined("THEMES_DIR")) {
  */
 class ThemesLoader extends Object implements Subscriber
 {
+    const classname = __CLASS__;
 
     public $onActivateTheme = array();
 
@@ -38,7 +39,8 @@ class ThemesLoader extends Object implements Subscriber
 
     private $frontendTheme;
 
-    const classname = __CLASS__;
+    private $backendTheme;
+
     /** @var  Theme */
     private $activeTheme;
 
@@ -66,26 +68,16 @@ class ThemesLoader extends Object implements Subscriber
         $this->frontendTheme = $name;
     }
 
+    public function setBackendTheme($name)
+    {
+        $this->backendTheme = $name;
+    }
+
     public function activateFrontendTheme()
     {
         $this->activeTheme = $this->themes[$this->frontendTheme];
         $this->onActivateTheme($this->activeTheme);
-
-        $theme = array(
-            "name" => $this->activeTheme->getName(),
-            "version" => $this->activeTheme->getVersion(),
-            "author" => $this->activeTheme->getAuthor(),
-            "dependencies" => $this->activeTheme->getDependencies(),
-        );
-        CmsPanel::$sections[] = function () use ($theme) {
-
-            $html = "<h2>Loaded Theme:</h2>";
-            $html .= "<div><table>";
-            $html .= "<thead><tr><th>Name</th><th>Version</th><th>Author</th><th>Deps</th></tr></thead>";
-            $html .= "<tr><td>" . $theme["name"] . "</td><td>" . $theme["version"] . "</td><td>" . $theme["author"] . "</td><td>".Dumper::toHtml($theme["dependencies"], array(Dumper::COLLAPSE => true))."</td></tr>";
-            $html .= "</table></div>";
-            return $html;
-        };
+        $this->addDebugSection();
     }
 
     public function getSubscribedEvents()
@@ -131,6 +123,31 @@ class ThemesLoader extends Object implements Subscriber
         } else {
             return $base . $templateFile . ".latte";
         }
+    }
+
+    public function activateBackendTheme()
+    {
+        $this->activeTheme = $this->themes[$this->backendTheme];
+        $this->onActivateTheme($this->activeTheme);
+        $this->addDebugSection();
+    }
+
+    private function addDebugSection()
+    {
+        $theme = array(
+            "name" => $this->activeTheme->getName(),
+            "version" => $this->activeTheme->getVersion(),
+            "author" => $this->activeTheme->getAuthor(),
+            "dependencies" => $this->activeTheme->getDependencies(),
+        );
+        CmsPanel::$sections[] = function () use ($theme) {
+            $html = "<h2>Loaded Theme:</h2>";
+            $html .= "<div><table>";
+            $html .= "<thead><tr><th>Name</th><th>Version</th><th>Author</th><th>Deps</th></tr></thead>";
+            $html .= "<tr><td>" . $theme["name"] . "</td><td>" . $theme["version"] . "</td><td>" . $theme["author"] . "</td><td>" . Dumper::toHtml($theme["dependencies"], array(Dumper::COLLAPSE => true)) . "</td></tr>";
+            $html .= "</table></div>";
+            return $html;
+        };
     }
 
 } 
