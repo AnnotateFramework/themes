@@ -8,12 +8,12 @@
 
 namespace AnnotateCms\Themes\Loaders;
 
-use AnnotateCms\Packages\Exceptions\BadPackageVersionException;
-use AnnotateCms\Packages\Exceptions\PackageNotFoundException;
-use AnnotateCms\Packages\Loaders\PackageLoader;
+use AnnotateCms\Framework\Diagnostics\CmsPanel;
+use AnnotateCms\Framework\Templating\ITemplateFactory;
 use AnnotateCms\Themes\Theme;
 use Kdyby\Events\Subscriber;
-use Nette\Templating\IFileTemplate;
+use Nette\Diagnostics\Dumper;
+use Nette\Object;
 use Nette\Templating\ITemplate;
 use Nette\Utils\Finder;
 use Nette\Utils\Neon;
@@ -26,9 +26,13 @@ if (!defined("THEMES_DIR")) {
 /**
  * Class ThemesLoader
  * @package AnnotateCms\Themes\Loaders
+ *
+ * @method onActivateTheme(Theme $activeTheme)
  */
-class ThemesLoader implements Subscriber
+class ThemesLoader extends Object implements Subscriber
 {
+
+    public $onActivateTheme = array();
 
     private $themes = array();
 
@@ -38,9 +42,8 @@ class ThemesLoader implements Subscriber
     /** @var  Theme */
     private $activeTheme;
 
-    function __construct(PackageLoader $packageLoader)
+    function __construct()
     {
-        $this->packageLoader = $packageLoader;
         $this->themes = $this->load();
     }
 
@@ -66,45 +69,68 @@ class ThemesLoader implements Subscriber
     public function activateFrontendTheme()
     {
         $this->activeTheme = $this->themes[$this->frontendTheme];
-    }
+        $this->onActivateTheme($this->activeTheme);
 
-    private function checkDependencies(Theme $theme)
-    {
-        if ($theme->isChecked()) {
-            return true;
-        }
+        $theme = array(
+            "name" => $this->activeTheme->getName(),
+            "version" => $this->activeTheme->getVersion(),
+            "author" => $this->activeTheme->getAuthor(),
+            "dependencies" => $this->activeTheme->getDependencies(),
+        );
+        CmsPanel::$sections[] = function () use ($theme) {
 
-        if (!$theme->hasDependencies()) {
-            return true;
-        }
-
-        foreach ($theme->getDependencies() as $name => $info) {
-            $version = isset($info["version"]) ? $info["version"] : null;
-            $variant = isset($info["variant"]) ? $info["variant"] : "default";
-
-            try {
-                $this->packageLoader->getPackage($name, $version, $variant);
-            } catch (PackageNotFoundException $e) {
-                throw new PackageNotFoundException("Theme cannot be loaded. Package '$name' does not exist.", 0, $e);
-            } catch (BadPackageVersionException $e) {
-                throw new BadPackageVersionException("Theme cannot be loaded. Theme requires '$name' version $version", 0, $e);
-            }
-        }
-        $theme->setChecked();
-        return true;
+            $html = "<h2>Loaded Theme:</h2>";
+            $html .= "<div><table>";
+            $html .= "<thead><tr><th>Name</th><th>Version</th><th>Author</th><th>Deps</th></tr></thead>";
+            $html .= "<tr><td>" . $theme["name"] . "</td><td>" . $theme["version"] . "</td><td>" . $theme["author"] . "</td><td>".Dumper::toHtml($theme["dependencies"], array(Dumper::COLLAPSE => true))."</td></tr>";
+            $html .= "</table></div>";
+            return $html;
+        };
     }
 
     public function getSubscribedEvents()
     {
         return array(
-            'AnnotateCms\Framework\Templating\TemplateFactory::onSetupTemplate'
+            'AnnotateCms\Framework\Templating\TemplateFactory::onSetupTemplate',
+            'AnnotateCms\Framework\Templating\TemplateFactory::onLoadTemplate',
+            'AnnotateCms\Framework\Templating\TemplateFactory::onLoadLayout',
         );
     }
 
     public function onSetupTemplate(ITemplate $template)
     {
         $template->theme = $this->activeTheme;
-        $template->themeDir = $template->basePath . "/" . $this->activeTheme->getRelativeDirectory() . "/";
+        $template->themeDir = $template->basePath . "/" . $this->activeTheme->getRelativePath() . "/";
+    }
+
+    public function onLoadTemplate(ITemplateFactory $templateFactory, $templateFile, $presenterName)
+    {
+        $templateFactory->addTemplate(
+            $this->formatTemplateFilePath($templateFile, $presenterName)
+        );
+        $templateFactory->addTemplate(
+            $this->formatTemplateFilePath($templateFile)
+        );
+    }
+
+    public function onLoadLayout(ITemplateFactory $templateFactory, $layoutFile, $presenterName)
+    {
+        $templateFactory->addLayout(
+            $this->formatTemplateFilePath($layoutFile, $presenterName)
+        );
+        $templateFactory->addLayout(
+            $this->formatTemplateFilePath($layoutFile)
+        );
+    }
+
+    private function formatTemplateFilePath($templateFile, $presenterName = null)
+    {
+        $base = $this->activeTheme->getPath() . DS . "templates" . DS;
+        if ($presenterName) {
+            return $base . $presenterName . DS . $templateFile . ".latte";
+        } else {
+            return $base . $templateFile . ".latte";
+        }
     }
 
 } 

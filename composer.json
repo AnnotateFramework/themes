@@ -13,8 +13,7 @@
     "require" : {
         "nette/nette" : "@dev",
         "annotatecms/events": "@dev",
-        "annotatecms/installer": "@dev",
-        "annotatecms/packages": "@dev"
+        "annotatecms/installer": "@dev"
     },
     "autoload": {
         "psr-4": {
