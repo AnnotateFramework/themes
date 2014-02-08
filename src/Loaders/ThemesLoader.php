@@ -10,16 +10,18 @@ namespace AnnotateCms\Themes\Loaders;
 
 use AnnotateCms\Framework\Diagnostics\CmsPanel;
 use AnnotateCms\Framework\Templating\ITemplateFactory;
+use AnnotateCms\Themes\Exceptions\ThemeNotFoundException;
 use AnnotateCms\Themes\Theme;
 use Kdyby\Events\Subscriber;
 use Nette\Diagnostics\Dumper;
 use Nette\Object;
+use Nette\Templating\IFileTemplate;
 use Nette\Templating\ITemplate;
 use Nette\Utils\Finder;
 use Nette\Utils\Neon;
 
 if (!defined("THEMES_DIR")) {
-    define("THEMES_DIR", APP_DIR . "themes" . DS);
+    define("THEMES_DIR", APP_DIR . DS . "addons" . DS . "themes" . DS);
 }
 
 
@@ -75,9 +77,24 @@ class ThemesLoader extends Object implements Subscriber
 
     public function activateFrontendTheme()
     {
-        $this->activeTheme = $this->themes[$this->frontendTheme];
+        $this->activeTheme = $this->getTheme($this->frontendTheme);
         $this->onActivateTheme($this->activeTheme);
         $this->addDebugSection();
+    }
+
+    public function activateBackendTheme()
+    {
+        $this->activeTheme = $this->getTheme($this->backendTheme);
+        $this->onActivateTheme($this->activeTheme);
+        $this->addDebugSection();
+    }
+
+    private function getTheme($name)
+    {
+        if (isset($this->themes[$name])) {
+            return $this->themes[$name];
+        }
+        throw new ThemeNotFoundException("Theme '$name' not found");
     }
 
     public function getSubscribedEvents()
@@ -86,17 +103,26 @@ class ThemesLoader extends Object implements Subscriber
             'AnnotateCms\Framework\Templating\TemplateFactory::onSetupTemplate',
             'AnnotateCms\Framework\Templating\TemplateFactory::onLoadTemplate',
             'AnnotateCms\Framework\Templating\TemplateFactory::onLoadLayout',
+            'AnnotateCms\Framework\Templating\TemplateFactory::onCreateFormTemplate',
         );
     }
 
     public function onSetupTemplate(ITemplate $template)
     {
+        if (!$this->activeTheme) {
+            return;
+        }
         $template->theme = $this->activeTheme;
         $template->themeDir = $template->basePath . "/" . $this->activeTheme->getRelativePath() . "/";
     }
 
     public function onLoadTemplate(ITemplateFactory $templateFactory, $templateFile, $presenterName)
     {
+
+        if (!$this->activeTheme) {
+            return;
+        }
+
         $templateFactory->addTemplate(
             $this->formatTemplateFilePath($templateFile, $presenterName)
         );
@@ -107,12 +133,24 @@ class ThemesLoader extends Object implements Subscriber
 
     public function onLoadLayout(ITemplateFactory $templateFactory, $layoutFile, $presenterName)
     {
+        if (!$this->activeTheme) {
+            return;
+        }
+
         $templateFactory->addLayout(
             $this->formatTemplateFilePath($layoutFile, $presenterName)
         );
         $templateFactory->addLayout(
             $this->formatTemplateFilePath($layoutFile)
         );
+    }
+
+    public function onCreateFormTemplate($fileName, IFileTemplate $template)
+    {
+        $path = $this->activeTheme->getPath() . DS . "components" . DS . $fileName;
+        if(file_exists($path)) {
+            $template->setFile($path);
+        }
     }
 
     private function formatTemplateFilePath($templateFile, $presenterName = null)
@@ -123,13 +161,6 @@ class ThemesLoader extends Object implements Subscriber
         } else {
             return $base . $templateFile . ".latte";
         }
-    }
-
-    public function activateBackendTheme()
-    {
-        $this->activeTheme = $this->themes[$this->backendTheme];
-        $this->onActivateTheme($this->activeTheme);
-        $this->addDebugSection();
     }
 
     private function addDebugSection()

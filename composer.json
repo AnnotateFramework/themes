@@ -12,7 +12,6 @@
     ],
     "require" : {
         "nette/nette" : "@dev",
-        "annotatecms/events": "@dev",
         "annotatecms/installer": "@dev"
     },
     "autoload": {
