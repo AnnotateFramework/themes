@@ -10,7 +10,7 @@ Note: this works when annotatecms/sandbox is installed
 
 Run:
 
-  composer require annotatecms/themes:@dev
+    composer require annotatecms/themes:@dev
 
 Configure
 ---------
@@ -27,13 +27,13 @@ Now edit any of your presenters:
     class FrontendPresenter extends BasePresenter
     {
         /** @var AnnotateCms\Themes\Loaders\ThemesLoader @inject */
-       public $themesLoader;
+        public $themesLoader;
     
-       public function startup()
-       {
-          parent::startup();
-          $this->themesLoader->activateFrontendTheme(); // or activateBackendTheme()
-       }
+        public function startup()
+        {
+            parent::startup();
+            $this->themesLoader->activateFrontendTheme(); // or activateBackendTheme()
+        }
     }
     
 Hint!
@@ -47,3 +47,4 @@ Uninstall
 Just remove line with `annotatecms/themes` from composer.json and run `composer update`
 
 Remove `themes` section from `app/config/app.neon` file
+Remove injection from your presenters and code added on installation.
