@@ -10,8 +10,8 @@
             "email": "vysinsky@live.com"
         }
     ],
-    "require" : {
-        "nette/nette" : "@dev",
+    "require": {
+        "nette/nette": "@dev",
         "annotatecms/installer": "@dev"
     },
     "autoload": {
@@ -20,7 +20,7 @@
         }
     },
     "extra": {
-        "extension-name" : "themes",
-        "extension-class" : "AnnotateCms\\Themes\\DI\\ThemesExtension"
+        "extension-name": "themes",
+        "extension-class": "AnnotateCms\\Themes\\DI\\ThemesExtension"
     }
 }
