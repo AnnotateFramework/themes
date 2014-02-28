@@ -18,6 +18,7 @@ class ThemesExtension extends CompilerExtension
 
 	private $defaults = array(
 		"frontend" => "Sandbox",
+		"backend" => "Flatty",
 	);
 
 
