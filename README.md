@@ -45,3 +45,5 @@ Uninstall
 ---------
 
 Just remove line with `annotatecms/themes` from composer.json and run `composer update`
+
+Remove `themes` section from `app/config/app.neon` file
