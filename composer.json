@@ -13,7 +13,7 @@
     "require": {
         "php": ">=5.4",
         "nette/nette": "2.1.*@dev",
-        "annotatecms/installer": "@dev",
+        "annotatecms/extensions-installer": "@dev",
         "annotatecms/framework": "@dev"
     },
     "suggest": {
