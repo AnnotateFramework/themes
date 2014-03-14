@@ -12,91 +12,91 @@ namespace AnnotateCms\Themes;
 class Theme
 {
 
-	private $defaultDefinition = array(
-		"name" => null,
-		"version" => null,
-		"author" => null,
-		"scripts" => array(),
-		"styles" => array(),
-		"dependencies" => array(),
-	);
+    private $defaultDefinition = [
+        "name" => null,
+        "version" => null,
+        "author" => null,
+        "scripts" => [],
+        "styles" => [],
+        "dependencies" => [],
+    ];
 
-	private $definition;
-	private $aDir;
-	private $rDir;
-	private $checked = false;
-
-
-	function __construct($def, $aDir)
-	{
-		$this->definition = \array_merge($this->defaultDefinition, $def);
-		$this->aDir = $aDir;
-		$this->rDir = \str_replace(ROOT_DIR, null, $aDir);
-	}
+    private $definition;
+    private $aDir;
+    private $rDir;
+    private $checked = false;
 
 
-	public function getName()
-	{
-		return $this->definition["name"];
-	}
+    function __construct($def, $aDir)
+    {
+        $this->definition = \array_merge($this->defaultDefinition, $def);
+        $this->aDir = $aDir;
+        $this->rDir = \str_replace(ROOT_DIR, null, $aDir);
+    }
 
 
-	public function getVersion()
-	{
-		return $this->definition["version"];
-	}
+    public function getName()
+    {
+        return $this->definition["name"];
+    }
 
 
-	public function getAuthor()
-	{
-		return $this->definition["author"];
-	}
+    public function getVersion()
+    {
+        return $this->definition["version"];
+    }
 
 
-	public function getScripts()
-	{
-		return $this->definition["scripts"];
-	}
+    public function getAuthor()
+    {
+        return $this->definition["author"];
+    }
 
 
-	public function getStyles()
-	{
-		return $this->definition["styles"];
-	}
+    public function getScripts()
+    {
+        return $this->definition["scripts"];
+    }
 
 
-	public function isChecked()
-	{
-		return $this->checked;
-	}
+    public function getStyles()
+    {
+        return $this->definition["styles"];
+    }
 
 
-	public function getDependencies()
-	{
-		return $this->definition["dependencies"];
-	}
+    public function isChecked()
+    {
+        return $this->checked;
+    }
 
 
-	public function hasDependencies()
-	{
-		return !empty($this->definition["dependencies"]);
-	}
+    public function getDependencies()
+    {
+        return $this->definition["dependencies"];
+    }
 
 
-	public function setChecked()
-	{
-		$this->checked = true;
-	}
+    public function hasDependencies()
+    {
+        return !empty($this->definition["dependencies"]);
+    }
 
 
-	public function getRelativePath()
-	{
-		return \str_replace("\\", "/", $this->rDir);
-	}
+    public function setChecked()
+    {
+        $this->checked = true;
+    }
 
 
-	public function getPath()
-	{
-		return $this->aDir;
-	}
+    public function getRelativePath()
+    {
+        return \str_replace("\\", "/", $this->rDir);
+    }
+
+
+    public function getPath()
+    {
+        return $this->aDir;
+    }
 }

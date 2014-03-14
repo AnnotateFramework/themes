@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "flatty.js",
+  "sourceRoot": "../coffee",
+  "sources": [
+    "flatty.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;AAAA,EAAA,CAAA,CAAE,SAAA,GAAA;WACA,CAAA,CAAE,yBAAF,CAA4B,CAAC,OAA7B,CAAqC;AAAA,MACnC,SAAA,EAAW,MADwB;AAAA,MAEnC,SAAA,EAAW,aAFwB;KAArC,EADA;EAAA,CAAF,CAAA,CAAA;AAAA"
+}

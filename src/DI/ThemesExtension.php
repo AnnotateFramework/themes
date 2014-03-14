@@ -9,31 +9,41 @@
 namespace AnnotateCms\Themes\DI;
 
 
+use AnnotateCms\Framework\DI\CompilerExtension;
 use AnnotateCms\Themes\Loaders\ThemesLoader;
 use Kdyby\Events\DI\EventsExtension;
-use Nette\DI\CompilerExtension;
 
 class ThemesExtension extends CompilerExtension
 {
 
-	private $defaults = array(
-		"frontend" => "Sandbox",
-		"backend" => "Flatty",
-	);
+
+    function getServices()
+    {
+        $config = $this->getConfig();
+        return [
+            "themeLoader" => [
+                "class" => ThemesLoader::classname,
+                "tags" => [EventsExtension::SUBSCRIBER_TAG],
+                "setup" => [
+                    "setFrontendTheme" => ["name" => $config["frontend"]],
+                    "setBackendTheme" => ["name" => $config["backend"]],
+                ],
+            ],
+        ];
+    }
 
 
-	public function loadConfiguration()
-	{
-		$builder = $this->getContainerBuilder();
-
-		$config = $this->getConfig($this->defaults);
-
-		$builder->addDefinition($this->prefix("themesLoader"))
-			->setClass(ThemesLoader::classname)
-			->addTag(EventsExtension::SUBSCRIBER_TAG)
-			->addSetup("setFrontendTheme", array("name" => $config["frontend"]))
-			->addSetup("setBackendTheme", array("name" => $config["backend"]));
-	}
+    function getFactories()
+    {
+        // TODO: Implement getFactories() method.
+    }
 
 
-} 
+    function  getDefaults()
+    {
+        return [
+            "frontend" => "Sandbox",
+            "backend" => "Flatty",
+        ];
+    }
+}

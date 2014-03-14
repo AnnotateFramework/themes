@@ -11,8 +11,10 @@
         }
     ],
     "require": {
+        "php": ">=5.4",
         "nette/nette": "@dev",
-        "annotatecms/installer": "@dev"
+        "annotatecms/installer": "@dev",
+        "annotatecms/framework": "@dev"
     },
     "autoload": {
         "psr-4": {

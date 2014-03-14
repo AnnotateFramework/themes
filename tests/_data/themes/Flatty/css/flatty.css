@@ -1,0 +1,99 @@
+body {
+    overflow: hidden;
+}
+
+body * {
+    border-radius: 0 !important;
+}
+
+#login-box {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#login-box img {
+    margin-bottom: 50px;
+}
+
+#theme-info {
+    position: fixed;
+    right: 10px;
+    bottom: 0;
+    font-size: 8pt;
+    font-style: italic;
+}
+
+#main-panel {
+    position: fixed;
+    width: 100%;
+    height: 40px;
+    background: #2980b9;
+}
+
+#main-panel .dropdown-menu {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+#main-panel span.dropdown {
+    display: inline-block;
+}
+
+#main-panel span.dropdown > a {
+    display: inline-block;
+    padding: 0 10px;
+}
+
+#main-panel span.dropdown > a:hover {
+    background: #3498db;
+}
+
+#main-panel .container {
+    width: 90%;
+    padding: 0;
+}
+
+#main-panel .container > a, #main-panel .container #right-panel > a {
+    display: inline-block;
+    padding: 0 10px;
+}
+
+#main-panel .container > a:hover, #main-panel .container #right-panel > a:hover {
+    background: #3498db;
+}
+
+#main-panel #brand {
+    color: white;
+    font-size: 20px;
+    font-weight: lighter;
+    text-decoration: none;
+    line-height: 40px;
+}
+
+#main-panel #brand img {
+    position: relative;
+    height: 35px;
+    top: -2px;
+}
+
+#main-panel #right-panel {
+    line-height: 40px;
+}
+
+#main-panel #right-panel a i, #main-panel #right-panel a .caret {
+    color: #cccccc;
+}
+
+#main-panel #right-panel a:hover i, #main-panel #right-panel a:hover .caret, #main-panel #right-panel a.active i, #main-panel #right-panel a.active .caret {
+    color: white;
+}
+
+#page-container {
+    padding: 0;
+    padding-top: 40px;
+}
+
+#page-container > [class^="col-"] {
+    padding: 0;
+}

@@ -1,0 +1,2 @@
+extensions:
+    themes: AnnotateCms\Themes\DI\ThemesExtension
