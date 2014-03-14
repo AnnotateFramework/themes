@@ -16,6 +16,9 @@
         "annotatecms/installer": "@dev",
         "annotatecms/framework": "@dev"
     },
+    "suggest": {
+        "annotatecms/packages": "Load themes dependencies automatically with packages package"
+    },
     "autoload": {
         "psr-4": {
             "AnnotateCms\\Themes\\": "src/"
