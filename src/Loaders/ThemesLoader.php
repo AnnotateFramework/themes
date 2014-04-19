@@ -13,12 +13,11 @@ use AnnotateCms\Framework\Templating\ITemplateFactory;
 use AnnotateCms\Themes\Exceptions\ThemeNotFoundException;
 use AnnotateCms\Themes\Theme;
 use Kdyby\Events\Subscriber;
-use Nette\Diagnostics\Dumper;
+use Nette\Bridges\ApplicationLatte\Template;
 use Nette\Object;
-use Nette\Templating\IFileTemplate;
-use Nette\Templating\ITemplate;
 use Nette\Utils\Finder;
 use Nette\Utils\Neon;
+use Tracy\Dumper;
 
 if (!defined("THEMES_DIR")) {
     define("THEMES_DIR", APP_DIR . "addons" . DS . "themes" . DS);
@@ -102,14 +101,13 @@ class ThemesLoader extends Object implements Subscriber
         $theme = [
             "name" => $this->activeTheme->getName(),
             "version" => $this->activeTheme->getVersion(),
-            "author" => $this->activeTheme->getAuthor(),
             "dependencies" => $this->activeTheme->getDependencies(),
         ];
         CmsPanel::$sections[] = function () use ($theme) {
             $html = "<h2>Loaded Theme:</h2>";
             $html .= "<div><table>";
-            $html .= "<thead><tr><th>Name</th><th>Version</th><th>Author</th><th>Deps</th></tr></thead>";
-            $html .= "<tr><td>" . $theme["name"] . "</td><td>" . $theme["version"] . "</td><td>" . $theme["author"] . "</td><td>" . Dumper::toHtml(
+            $html .= "<thead><tr><th>Name</th><th>Version</th><th>Deps</th></tr></thead>";
+            $html .= "<tr><td>" . $theme["name"] . "</td><td>" . $theme["version"] . "</td><td>" . Dumper::toHtml(
                     $theme["dependencies"],
                     [Dumper::COLLAPSE => true]
                 ) . "</td></tr>";
@@ -139,7 +137,7 @@ class ThemesLoader extends Object implements Subscriber
     }
 
 
-    public function onSetupTemplate(ITemplate $template)
+    public function onSetupTemplate(Template $template)
     {
         if (!$this->activeTheme) {
             return;
@@ -191,19 +189,19 @@ class ThemesLoader extends Object implements Subscriber
     }
 
 
-    public function onLoadComponentTemplate(IFileTemplate $template, $fileName)
+    public function onLoadComponentTemplate(Template $template, $fileName)
     {
         $this->onCreateFormTemplate($fileName, $template);
     }
 
 
     /**
-     * @param               $fileName
-     * @param IFileTemplate $template
+     * @param           $fileName
+     * @param Template  $template
      *
      * TODO: Remove and use only onLoadComponentTemplate method
      */
-    public function onCreateFormTemplate($fileName, IFileTemplate $template)
+    public function onCreateFormTemplate($fileName, Template $template)
     {
         if (!$this->activeTheme) {
             return;
