@@ -7,5 +7,6 @@ php:
 before_script:
   - composer self-update
   - composer install --no-interaction --prefer-source --dev
+  - wget http://codeception.com/codecept.phar
 
-script: "php codecept run"
+script: "php codecept.phar run"
