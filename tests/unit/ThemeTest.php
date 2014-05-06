@@ -31,7 +31,7 @@ class ThemeTest extends \Codeception\TestCase\Test
                         'version' => '3',
                     ],
                 ],
-            ], '/home/michal/www/cms/vendor/annotatecms/themes/tests/_data/themes/Flatty/'
+            ], DATA_DIR . '/themes/Flatty/'
         );
     }
 
