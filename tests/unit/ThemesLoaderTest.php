@@ -51,7 +51,7 @@ class ThemesLoaderTest extends \Codeception\TestCase\Test
                         'version' => '3',
                     ],
                 ],
-            ], '/home/michal/www/cms/vendor/annotatecms/themes/tests/_data/themes/Flatty/'
+            ], DATA_DIR . '/themes/Flatty/'
         );
 
         $this->assertEquals($theme, $this->themesLoader->getActiveTheme());
@@ -78,7 +78,7 @@ class ThemesLoaderTest extends \Codeception\TestCase\Test
                         'version' => '3',
                     ],
                 ],
-            ], '/home/michal/www/cms/vendor/annotatecms/themes/tests/_data/themes/Flatty/'
+            ], DATA_DIR . '/themes/Flatty/'
         );
         $this->assertEquals($theme, $this->themesLoader->getActiveTheme());
     }
@@ -164,7 +164,7 @@ class ThemesLoaderTest extends \Codeception\TestCase\Test
         $this->themesLoader->onLoadComponentTemplate($template, 'mainPanel.latte');
 
         $this->assertEquals(
-            '/home/michal/www/cms/vendor/annotatecms/themes/tests/_data/themes/Flatty/templates/components/mainPanel.latte',
+            DATA_DIR . '/themes/Flatty/templates/components/mainPanel.latte',
             $template->getFile()
         );
     }
