@@ -94,7 +94,7 @@ class ThemeTest extends \Codeception\TestCase\Test
     public function testThemeReturnsItsPath()
     {
         $this->assertSame(
-            '/home/michal/www/cms/vendor/annotatecms/themes/tests/_data/themes/Flatty/',
+            DATA_DIR . '/themes/Flatty/',
             $this->theme->getPath()
         );
     }
