@@ -96,7 +96,7 @@ class ThemesLoaderTest extends \Codeception\TestCase\Test
 
     public function testItAddsPropertiesToTemplate()
     {
-        $template = new \Nette\Templating\Template();
+        $template = new \Nette\Bridges\ApplicationLatte\Template(new \Latte\Engine());
         $template->basePath = '/fake/base/path';
         $this->themesLoader->setFrontendTheme('Flatty');
         $this->themesLoader->activateFrontendTheme();
@@ -135,7 +135,7 @@ class ThemesLoaderTest extends \Codeception\TestCase\Test
 
     public function testItDoesNothingWhenNoThemeIsSet()
     {
-        $template = new \Nette\Templating\FileTemplate();
+        $template = new \Nette\Bridges\ApplicationLatte\Template(new \Latte\Engine());
         $this->themesLoader->onSetupTemplate($template);
 
         $this->assertFalse(isset($template->theme));
@@ -160,7 +160,7 @@ class ThemesLoaderTest extends \Codeception\TestCase\Test
     {
         $this->themesLoader->setFrontendTheme('Flatty');
         $this->themesLoader->activateFrontendTheme();
-        $template = new \Nette\Templating\FileTemplate();
+        $template = new \Nette\Bridges\ApplicationLatte\Template(new \Latte\Engine());
         $this->themesLoader->onLoadComponentTemplate($template, 'mainPanel.latte');
 
         $this->assertEquals(
