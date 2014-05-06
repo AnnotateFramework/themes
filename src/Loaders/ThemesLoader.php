@@ -14,9 +14,9 @@ use AnnotateCms\Themes\Exceptions\ThemeNotFoundException;
 use AnnotateCms\Themes\Theme;
 use Kdyby\Events\Subscriber;
 use Nette\Bridges\ApplicationLatte\Template;
+use Nette\Neon\Neon;
 use Nette\Object;
 use Nette\Utils\Finder;
-use Nette\Utils\Neon;
 use Tracy\Dumper;
 
 if (!defined("THEMES_DIR")) {
