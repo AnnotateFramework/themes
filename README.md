@@ -21,10 +21,10 @@ Default themes are set to `Sandbox` for frontend and `Flatty` for backend. Both 
 Themes path is also configurable via Neon. Default `directory` value is `%appDir%/app/addons/themes/`.
 To change themes open app/config/app.neon and add following configuration:
 
-  themes:
-    directory: %appDir%/app/
-    frontend: FrontendThemeName
-    backend: BackendThemeName
+    themes:
+        directory: %appDir%/app/
+        frontend: FrontendThemeName
+        backend: BackendThemeName
     
 Now edit any of your presenters:
 
