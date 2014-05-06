@@ -6,6 +6,6 @@ php:
 
 before_script:
   - compsoer self-update
-  . composer install --no-interaction --prefer-source --dev
+  - composer install --no-interaction --prefer-source --dev
 
 script: "php codecept run"
