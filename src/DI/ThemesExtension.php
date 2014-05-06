@@ -15,12 +15,13 @@ use Nette\DI\CompilerExtension;
 
 class ThemesExtension extends CompilerExtension
 {
+
     public function loadConfiguration()
     {
         $configuration = $this->getConfig($this->getDefaults());
 
         $this->getContainerBuilder()->addDefinition($this->prefix('themeLoader'))
-            ->setClass(ThemesLoader::classname)
+            ->setClass(ThemesLoader::classname, ['themesDir' => $configuration['directory']])
             ->addTag(EventsExtension::SUBSCRIBER_TAG)
             ->addSetup('setFrontendTheme', ['name' => $configuration['frontend']])
             ->addSetup('setBackendTheme', ['name' => $configuration['backend']]);
@@ -30,6 +31,7 @@ class ThemesExtension extends CompilerExtension
     function  getDefaults()
     {
         return [
+            'directory' => '%appDir%/app/addons/themes/',
             'frontend' => '',
             'backend' => '',
         ];

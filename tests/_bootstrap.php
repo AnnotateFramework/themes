@@ -11,5 +11,4 @@ if (file_exists($projectPath)) {
 define('ROOT_DIR', __DIR__ . '/');
 define('DATA_DIR', __DIR__ . '/_data');
 define('TEMP_DIR', DATA_DIR . '/tmp');
-define('THEMES_DIR', DATA_DIR . '/themes');
 define('DS', DIRECTORY_SEPARATOR);

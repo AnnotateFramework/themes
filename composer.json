@@ -15,6 +15,9 @@
         "annotatecms/extensions-installer": "@dev",
         "annotatecms/framework": "@dev"
     },
+    "require-dev": {
+        "codeception/codeception": "@dev"
+    },
     "suggest": {
         "annotatecms/packages": "Load themes dependencies automatically with packages package"
     },

@@ -19,10 +19,6 @@ use Nette\Object;
 use Nette\Utils\Finder;
 use Tracy\Dumper;
 
-if (!defined("THEMES_DIR")) {
-    define("THEMES_DIR", APP_DIR . "addons" . DS . "themes" . DS);
-}
-
 
 /**
  * Class ThemesLoader
@@ -46,9 +42,13 @@ class ThemesLoader extends Object implements Subscriber
     /** @var  Theme */
     private $activeTheme;
 
+    /** @var string */
+    private $themesDir;
 
-    function __construct()
+
+    function __construct($themesDir)
     {
+        $this->themesDir = $themesDir;
         $this->themes = $this->load();
     }
 
@@ -56,7 +56,7 @@ class ThemesLoader extends Object implements Subscriber
     private function load()
     {
         $themes = [];
-        foreach (Finder::findFiles("*theme.neon")->from(\THEMES_DIR) as $path => $file) {
+        foreach (Finder::findFiles("*theme.neon")->from($this->themesDir) as $path => $file) {
             $neon = Neon::decode(\file_get_contents($path));
             $aDir = \dirname($path) . DS;
             $themes[$neon["name"]] = new Theme($neon, $aDir);

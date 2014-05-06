@@ -13,7 +13,7 @@ class ThemesLoaderTest extends \Codeception\TestCase\Test
 
     protected function _before()
     {
-        $this->themesLoader = new \AnnotateCms\Themes\Loaders\ThemesLoader();
+        $this->themesLoader = new \AnnotateCms\Themes\Loaders\ThemesLoader(DATA_DIR . '/themes');
     }
 
 
