@@ -5,7 +5,7 @@ php:
   - 5.5
 
 before_script:
-  - compsoer self-update
+  - composer self-update
   - composer install --no-interaction --prefer-source --dev
 
 script: "php codecept run"
