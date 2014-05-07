@@ -8,8 +8,8 @@
 
 namespace AnnotateCms\Themes\Loaders;
 
-use AnnotateCms\Framework\Diagnostics\CmsPanel;
-use AnnotateCms\Framework\Templating\ITemplateFactory;
+use AnnotateCms\Diagnostics\CmsPanel;
+use AnnotateCms\Templating\ITemplateFactory;
 use AnnotateCms\Themes\Exceptions\ThemeNotFoundException;
 use AnnotateCms\Themes\Theme;
 use Kdyby\Events\Subscriber;
@@ -128,11 +128,11 @@ class ThemesLoader extends Object implements Subscriber
     public function getSubscribedEvents()
     {
         return [
-            'AnnotateCms\Framework\Templating\TemplateFactory::onSetupTemplate',
-            'AnnotateCms\Framework\Templating\TemplateFactory::onLoadTemplate',
-            'AnnotateCms\Framework\Templating\TemplateFactory::onLoadLayout',
-            'AnnotateCms\Framework\Templating\TemplateFactory::onCreateFormTemplate',
-            'AnnotateCms\Framework\Templating\TemplateFactory::onLoadComponentTemplate',
+            'AnnotateCms\Templating\TemplateFactory::onSetupTemplate',
+            'AnnotateCms\Templating\TemplateFactory::onLoadTemplate',
+            'AnnotateCms\Templating\TemplateFactory::onLoadLayout',
+            'AnnotateCms\Templating\TemplateFactory::onCreateFormTemplate',
+            'AnnotateCms\Templating\TemplateFactory::onLoadComponentTemplate',
         ];
     }
 

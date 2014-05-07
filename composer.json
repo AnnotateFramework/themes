@@ -13,11 +13,13 @@
     "require": {
         "php": ">=5.4",
         "annotatecms/extensions-installer": "@dev",
-        "annotatecms/framework": "@dev"
+        "annotatecms/diagnostics": "@dev",
+        "annotatecms/templating": "@dev",
+        "nette/bootstrap": "@dev",
+        "kdyby/events": "@dev"
     },
     "require-dev": {
-        "codeception/codeception": "@dev",
-        "annotatecms/packages": "@dev"
+        "codeception/codeception": "@dev"
     },
     "suggest": {
         "annotatecms/packages": "Load themes dependencies automatically with packages package"

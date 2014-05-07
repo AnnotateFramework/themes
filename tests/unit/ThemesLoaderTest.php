@@ -20,11 +20,11 @@ class ThemesLoaderTest extends \Codeception\TestCase\Test
     public function testItListensCorrectEvents()
     {
         $events = [
-            'AnnotateCms\Framework\Templating\TemplateFactory::onSetupTemplate',
-            'AnnotateCms\Framework\Templating\TemplateFactory::onLoadTemplate',
-            'AnnotateCms\Framework\Templating\TemplateFactory::onLoadLayout',
-            'AnnotateCms\Framework\Templating\TemplateFactory::onCreateFormTemplate',
-            'AnnotateCms\Framework\Templating\TemplateFactory::onLoadComponentTemplate',
+            'AnnotateCms\Templating\TemplateFactory::onSetupTemplate',
+            'AnnotateCms\Templating\TemplateFactory::onLoadTemplate',
+            'AnnotateCms\Templating\TemplateFactory::onLoadLayout',
+            'AnnotateCms\Templating\TemplateFactory::onCreateFormTemplate',
+            'AnnotateCms\Templating\TemplateFactory::onLoadComponentTemplate',
         ];
         $this->assertEquals($events, $this->themesLoader->getSubscribedEvents());
     }
@@ -113,7 +113,7 @@ class ThemesLoaderTest extends \Codeception\TestCase\Test
         $this->themesLoader->setFrontendTheme('Flatty');
         $this->themesLoader->activateFrontendTheme();
 
-        $templateFactory = $this->getMock('\AnnotateCms\Framework\Templating\ITemplateFactory');
+        $templateFactory = $this->getMock('\AnnotateCms\Templating\ITemplateFactory');
         $templateFactory->expects($this->exactly(2))
             ->method('addTemplate');
         $this->themesLoader->onLoadTemplate($templateFactory, 'template.latte', 'TestPresenter');
@@ -126,7 +126,7 @@ class ThemesLoaderTest extends \Codeception\TestCase\Test
         $this->themesLoader->setFrontendTheme('Flatty');
         $this->themesLoader->activateFrontendTheme();
 
-        $templateFactory = $this->getMock('\AnnotateCms\Framework\Templating\ITemplateFactory');
+        $templateFactory = $this->getMock('\AnnotateCms\Templating\ITemplateFactory');
         $templateFactory->expects($this->exactly(2))
             ->method('addLayout');
         $this->themesLoader->onLoadLayout($templateFactory, '@layout.latte', 'TestPresenter');
@@ -141,7 +141,7 @@ class ThemesLoaderTest extends \Codeception\TestCase\Test
         $this->assertFalse(isset($template->theme));
         $this->assertFalse(isset($template->themeDir));
 
-        $templateFactory = $this->getMock('\AnnotateCms\Framework\Templating\ITemplateFactory');
+        $templateFactory = $this->getMock('\AnnotateCms\Templating\ITemplateFactory');
         $templateFactory->expects($this->exactly(0))
             ->method('addTemplate');
         $this->themesLoader->onLoadTemplate($templateFactory, 'template.latte', 'TestPresenter');
