@@ -16,7 +16,7 @@
         "annotatecms/diagnostics": "@dev",
         "annotatecms/templating": "@dev",
         "nette/bootstrap": "@dev",
-        "kdyby/events": "@dev"
+        "annotatecms/events": "@dev"
     },
     "require-dev": {
         "codeception/codeception": "@dev"
