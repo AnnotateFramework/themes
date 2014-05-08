@@ -21,7 +21,6 @@ class ExtensionTest extends \Codeception\TestCase\Test
 
     public function testExtensionAddsServices()
     {
-        return;
         $dic = $this->createContainer();
         $this->assertTrue($dic->getService('themes.themeLoader') instanceof \AnnotateCms\Themes\Loaders\ThemesLoader);
     }
