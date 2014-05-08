@@ -1,9 +1,6 @@
 body {
     overflow: hidden;
-}
-
-body * {
-    border-radius: 0 !important;
+    *border-radius: 0 !important;
 }
 
 #login-box {
@@ -96,4 +93,17 @@ body * {
 
 #page-container > [class^="col-"] {
     padding: 0;
+}
+
+.nav li i {
+    margin-right: 8px;
+}
+
+.nav li.active {
+    font-weight: bold;
+}
+
+a[href^="error:"] {
+    background: red;
+    color: white;
 }

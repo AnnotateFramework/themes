@@ -1,21 +1,24 @@
 <?php
 
-use AnnotateCms\Themes\Theme;
+namespace AnnotateCmsTests\Themes;
 
-class ThemeTest extends \Codeception\TestCase\Test
+use AnnotateCms\Themes\Theme;
+use Tester\Assert;
+use Tester;
+
+
+require_once __DIR__ . '/../bootstrap.php';
+
+class ThemeTest extends TestCase
 {
-    /**
-     * @var \CodeGuy
-     */
-    protected $codeGuy;
 
     /** @var  Theme */
     private $theme;
 
 
-    protected function _before()
+    public function setUp()
     {
-        $this->theme = new \AnnotateCms\Themes\Theme(
+        $this->theme = new Theme(
             [
                 'name' => 'Flatty',
                 'version' => 0.1,
@@ -31,32 +34,32 @@ class ThemeTest extends \Codeception\TestCase\Test
                         'version' => '3',
                     ],
                 ],
-            ], DATA_DIR . '/themes/Flatty/'
+            ], ROOT_DIR . '/data/themes/Flatty/'
         );
     }
 
 
     public function testThemeReturnsItsName()
     {
-        $this->assertSame('Flatty', $this->theme->getName());
+        Assert::same('Flatty', $this->theme->getName());
     }
 
 
     public function testThemeReturnsItsVersion()
     {
-        $this->assertEquals(0.1, $this->theme->getVersion());
+        Assert::equal(0.1, $this->theme->getVersion());
     }
 
 
     public function testThemeReturnsItsAuthor()
     {
-        $this->assertSame('Michal Vyšinský', $this->theme->getAuthor());
+        Assert::same('Michal Vyšinský', $this->theme->getAuthor());
     }
 
 
     public function testThemeReturnsItsScripts()
     {
-        $this->assertSame(
+        Assert::same(
             [
                 '@js/flatty.js',
             ],
@@ -67,7 +70,7 @@ class ThemeTest extends \Codeception\TestCase\Test
 
     public function testThemeReturnsItsStyles()
     {
-        $this->assertSame(
+        Assert::same(
             [
                 '@css/flatty.css',
             ],
@@ -78,7 +81,7 @@ class ThemeTest extends \Codeception\TestCase\Test
 
     public function testThemeReturnsItsDependencies()
     {
-        $this->assertSame(
+        Assert::same(
             [
                 'TwitterBootstrap' => [
                     'version' => '3'
@@ -86,34 +89,29 @@ class ThemeTest extends \Codeception\TestCase\Test
             ],
             $this->theme->getDependencies()
         );
-
-        $this->assertTrue($this->theme->hasDependencies());
+        Assert::true($this->theme->hasDependencies());
     }
 
 
     public function testThemeReturnsItsPath()
     {
-        $this->assertSame(
-            DATA_DIR . '/themes/Flatty/',
-            $this->theme->getPath()
-        );
+        Assert::same(ROOT_DIR . '/data/themes/Flatty/', $this->theme->getPath());
     }
 
 
     public function testThemeReturnsItsRelativePath()
     {
-        $this->assertSame(
-            '_data/themes/Flatty/',
-            $this->theme->getRelativePath()
-        );
+        Assert::same('/data/themes/Flatty/', $this->theme->getRelativePath());
     }
 
 
     public function testCheckWorks()
     {
-        $this->assertFalse($this->theme->isChecked());
+        Assert::false($this->theme->isChecked());
         $this->theme->setChecked();
-        $this->assertTrue($this->theme->isChecked());
+        Assert::true($this->theme->isChecked());
     }
 
 }
+
+\run(new ThemeTest);

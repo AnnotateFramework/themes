@@ -1,7 +1,0 @@
-<ul class="nav">
-    {foreach $links as $link}
-        <li{ifCurrent $link->url} class="active"{/ifCurrent}>
-            <a n:href="$link->url"><i class="{$link->icon}"></i> {$link->name}</a>
-        </li>
-    {/foreach}
-</ul>
