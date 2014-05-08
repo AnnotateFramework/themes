@@ -19,7 +19,8 @@
         "annotatecms/events": "@dev"
     },
     "require-dev": {
-        "codeception/codeception": "@dev"
+        "nette/tester": "@dev",
+        "janmarek/mockista": "@dev"
     },
     "suggest": {
         "annotatecms/packages": "Load themes dependencies automatically with packages package"

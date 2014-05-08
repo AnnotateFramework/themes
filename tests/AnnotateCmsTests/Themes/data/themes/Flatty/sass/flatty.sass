@@ -1,8 +1,7 @@
 body
   overflow: hidden
 
-  *
-    border-radius: 0 !important
+  *border-radius: 0 !important
 
 #login-box
   margin-top: 20px
@@ -75,3 +74,13 @@ body
   padding-top: 40px
   > [class^="col-"]
     padding: 0
+
+.nav li
+  i
+    margin-right: 8px
+  &.active
+    font-weight: bold
+
+a[href^="error:"]
+  background: red
+  color: white

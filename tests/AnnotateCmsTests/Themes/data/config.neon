@@ -2,4 +2,4 @@ extensions:
     themes: AnnotateCms\Themes\DI\ThemesExtension
 
 themes:
-    directory: %appDir%/../_data/themes # %appDir% = tests/unit
+    directory: %appDir%/data/themes
