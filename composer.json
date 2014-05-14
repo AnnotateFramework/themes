@@ -15,7 +15,7 @@
         "annotatecms/extensions-installer": "@dev",
         "annotatecms/diagnostics": "@dev",
         "annotatecms/templating": "@dev",
-        "nette/bootstrap": "@dev",
+        "nette/bootstrap": "~2.2.0",
         "annotatecms/events": "@dev"
     },
     "require-dev": {
