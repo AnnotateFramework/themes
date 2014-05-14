@@ -12,11 +12,11 @@
     ],
     "require": {
         "php": ">=5.4",
-        "annotatecms/extensions-installer": "@dev",
-        "annotatecms/diagnostics": "@dev",
-        "annotatecms/templating": "@dev",
-        "nette/bootstrap": "~2.2.0",
-        "annotatecms/events": "@dev"
+        "annotatecms/extensions-installer": "@alpha",
+        "annotatecms/diagnostics": "@alpha",
+        "annotatecms/templating": "@alpha",
+        "annotatecms/events": "@alpha",
+        "nette/bootstrap": "~2.2.0"
     },
     "require-dev": {
         "nette/tester": "@dev",
