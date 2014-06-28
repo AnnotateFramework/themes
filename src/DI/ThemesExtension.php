@@ -21,7 +21,7 @@ class ThemesExtension extends CompilerExtension
         $configuration = $this->getConfig($this->getDefaults());
 
         $this->getContainerBuilder()->addDefinition($this->prefix('themeLoader'))
-            ->setClass(ThemesLoader::classname, ['themesDir' => $configuration['directory']])
+            ->setClass(ThemesLoader::CLASSNAME, ['themesDir' => $configuration['directory']])
             ->addTag(EventsExtension::SUBSCRIBER_TAG)
             ->addSetup('setFrontendTheme', ['name' => $configuration['frontend']])
             ->addSetup('setBackendTheme', ['name' => $configuration['backend']]);

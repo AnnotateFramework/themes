@@ -29,7 +29,7 @@ use Tracy\Dumper;
  */
 class ThemesLoader extends Object implements Subscriber
 {
-    const classname = __CLASS__;
+    const CLASSNAME = __CLASS__;
 
     public $onActivateTheme = [];
 
@@ -222,4 +222,4 @@ class ThemesLoader extends Object implements Subscriber
         return $this->activeTheme;
     }
 
-} 
+}
