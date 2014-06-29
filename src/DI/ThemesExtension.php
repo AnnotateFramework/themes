@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Michal
- * Date: 8.1.14
- * Time: 19:02
- */
 
 namespace AnnotateCms\Themes\DI;
 
@@ -13,27 +7,29 @@ use AnnotateCms\Themes\Loaders\ThemesLoader;
 use Kdyby\Events\DI\EventsExtension;
 use Nette\DI\CompilerExtension;
 
+
 class ThemesExtension extends CompilerExtension
 {
 
-    public function loadConfiguration()
-    {
-        $configuration = $this->getConfig($this->getDefaults());
+	public function loadConfiguration()
+	{
+		$configuration = $this->getConfig($this->getDefaults());
 
-        $this->getContainerBuilder()->addDefinition($this->prefix('themeLoader'))
-            ->setClass(ThemesLoader::CLASSNAME, ['themesDir' => $configuration['directory']])
-            ->addTag(EventsExtension::SUBSCRIBER_TAG)
-            ->addSetup('setFrontendTheme', ['name' => $configuration['frontend']])
-            ->addSetup('setBackendTheme', ['name' => $configuration['backend']]);
-    }
+		$this->getContainerBuilder()->addDefinition($this->prefix('themeLoader'))
+			->setClass(ThemesLoader::CLASSNAME, ['themesDir' => $configuration['directory']])
+			->addTag(EventsExtension::TAG_SUBSCRIBER)
+			->addSetup('setFrontendTheme', ['name' => $configuration['frontend']])
+			->addSetup('setBackendTheme', ['name' => $configuration['backend']]);
+	}
 
 
-    function  getDefaults()
-    {
-        return [
-            'directory' => '%appDir%/app/addons/themes/',
-            'frontend' => '',
-            'backend' => '',
-        ];
-    }
+	public function  getDefaults()
+	{
+		return [
+			'directory' => '%appDir%/app/addons/themes/',
+			'frontend'  => '',
+			'backend'   => '',
+		];
+	}
+
 }
