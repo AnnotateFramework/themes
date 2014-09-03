@@ -7,7 +7,7 @@ use AnnotateCms\Templating\ITemplateFactory;
 use AnnotateCms\Themes\Exceptions\ThemeNotFoundException;
 use AnnotateCms\Themes\Theme;
 use Kdyby\Events\Subscriber;
-use Nette\Bridges\ApplicationLatte\Template;
+use Latte\Template;
 use Nette\Neon\Neon;
 use Nette\Object;
 use Nette\Utils\Finder;

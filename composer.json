@@ -15,7 +15,14 @@
         "annotatecms/diagnostics": "@dev",
         "annotatecms/templating": "@dev",
         "annotatecms/events": "@dev",
-        "nette/bootstrap": "@dev"
+        "nette/bootstrap": "@dev",
+        "nette/http": "@dev",
+        "nette/security": "@dev",
+        "nette/application": "@dev",
+        "latte/latte": "@dev",
+        "tracy/tracy": "@dev",
+        "nette/safe-stream": "@dev",
+        "nette/caching": "@dev"
     },
     "require-dev": {
         "nette/tester": "@dev",

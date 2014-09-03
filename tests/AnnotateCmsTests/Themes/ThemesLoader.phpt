@@ -5,7 +5,9 @@ namespace AnnotateCmsTests\Themes;
 use AnnotateCms\Themes\Loaders\ThemesLoader;
 use AnnotateCms\Themes\Theme;
 use Latte\Engine;
-use Nette\Bridges\ApplicationLatte\Template;
+use Latte\Macros\CoreMacros;
+use Latte\Template;
+use Nette\Bridges\ApplicationLatte\UIMacros;
 use Tester;
 use Tester\Assert;
 
@@ -92,7 +94,7 @@ class ThemesLoaderTest extends TestCase
 
 	public function testItAddsPropertiesToTemplate()
 	{
-		$template = new Template(new Engine);
+		$template = $this->createTemplate();
 		$template->basePath = '/fake/base/path';
 		$this->themesLoader->setFrontendTheme('Flatty');
 		$this->themesLoader->activateFrontendTheme();
@@ -115,7 +117,7 @@ class ThemesLoaderTest extends TestCase
 
 	public function testItDoesNothingWhenNoThemeIsSet()
 	{
-		$template = new Template(new Engine);
+		$template = $this->createTemplate();
 		$this->themesLoader->onSetupTemplate($template);
 
 		Assert::false(isset($template->theme));
@@ -129,7 +131,7 @@ class ThemesLoaderTest extends TestCase
 		$this->themesLoader->onLoadLayout($templateFactory, '@layout.latte', 'TestPresenter');
 
 		$this->themesLoader->onLoadComponentTemplate($template, 'mainPanel.latte');
-		$file = $template->getFile();
+		$file = $template;
 
 		Assert::true(empty($file));
 	}
@@ -139,13 +141,24 @@ class ThemesLoaderTest extends TestCase
 	{
 		$this->themesLoader->setFrontendTheme('Flatty');
 		$this->themesLoader->activateFrontendTheme();
-		$template = new Template(new Engine);
+		$template = $this->createTemplate();
 		$this->themesLoader->onLoadComponentTemplate($template, 'mainPanel.latte');
 
 		Assert::equal(
 			ROOT_DIR . '/Themes/data/themes/Flatty/templates/components/mainPanel.latte',
-			$template->getFile()
+			$template
 		);
+	}
+
+
+	/**
+	 * @return Template
+	 */
+	private function createTemplate()
+	{
+		$filters = [];
+		$latte = new Engine();
+		return new Template([], $filters, $latte, 'template');
 	}
 
 }
