@@ -6,8 +6,9 @@ use AnnotateCms\Diagnostics\CmsPanel;
 use AnnotateCms\Templating\ITemplateFactory;
 use AnnotateCms\Themes\Exceptions\ThemeNotFoundException;
 use AnnotateCms\Themes\Theme;
+use Exception;
 use Kdyby\Events\Subscriber;
-use Latte\Template;
+use Nette\Bridges\ApplicationLatte\Template;
 use Nette\Neon\Neon;
 use Nette\Object;
 use Nette\Utils\Finder;
@@ -46,6 +47,10 @@ class ThemesLoader extends Object implements Subscriber
 
 	private function load()
 	{
+		if (!is_dir($this->themesDir)) {
+			throw new Exception('Themes directory "' . $this->themesDir . '" not found.');
+		}
+
 		$themes = [];
 		foreach (Finder::findFiles("*theme.neon")->from($this->themesDir) as $path => $file) {
 			$neon = Neon::decode(\file_get_contents($path));
@@ -90,8 +95,8 @@ class ThemesLoader extends Object implements Subscriber
 	private function addDebugSection()
 	{
 		$theme = [
-			"name"         => $this->activeTheme->getName(),
-			"version"      => $this->activeTheme->getVersion(),
+			"name" => $this->activeTheme->getName(),
+			"version" => $this->activeTheme->getVersion(),
 			"dependencies" => $this->activeTheme->getDependencies(),
 		];
 		CmsPanel::$sections[] = function () use ($theme) {

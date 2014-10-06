@@ -5,9 +5,7 @@ namespace AnnotateCmsTests\Themes;
 use AnnotateCms\Themes\Loaders\ThemesLoader;
 use AnnotateCms\Themes\Theme;
 use Latte\Engine;
-use Latte\Macros\CoreMacros;
-use Latte\Template;
-use Nette\Bridges\ApplicationLatte\UIMacros;
+use Nette\Bridges\ApplicationLatte\Template;
 use Tester;
 use Tester\Assert;
 
@@ -32,13 +30,13 @@ class ThemesLoaderTest extends TestCase
 		$this->themesLoader = new ThemesLoader(ROOT_DIR . '/Themes/data/themes');
 		$this->flattyTheme = new Theme(
 			[
-				'name'         => 'Flatty',
-				'version'      => 0.1,
-				'author'       => 'Michal Vyšinský',
-				'scripts'      => [
+				'name' => 'Flatty',
+				'version' => 0.1,
+				'author' => 'Michal Vyšinský',
+				'scripts' => [
 					'@js/flatty.js',
 				],
-				'styles'       => [
+				'styles' => [
 					'@css/flatty.css',
 				],
 				'dependencies' => [
@@ -158,6 +156,7 @@ class ThemesLoaderTest extends TestCase
 	{
 		$filters = [];
 		$latte = new Engine();
+
 		return new Template([], $filters, $latte, 'template');
 	}
 
