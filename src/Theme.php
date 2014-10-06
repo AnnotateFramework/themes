@@ -24,11 +24,11 @@ class Theme
 	private $checked = FALSE;
 
 
-	function __construct($def, $aDir)
+	function __construct($def, $aDir, $rDir)
 	{
 		$this->definition = array_merge($this->defaultDefinition, $def);
 		$this->aDir = $aDir;
-		$this->rDir = str_replace(ROOT_DIR, NULL, $aDir);
+		$this->rDir = $rDir;
 	}
 
 

@@ -37,10 +37,14 @@ class ThemesLoader extends Object implements Subscriber
 	/** @var string */
 	private $themesDir;
 
+	/** @var string */
+	private $rootDir;
 
-	public function __construct($themesDir)
+
+	public function __construct($themesDir, $rootDir)
 	{
 		$this->themesDir = $themesDir;
+		$this->rootDir = $rootDir;
 		$this->themes = $this->load();
 	}
 
@@ -54,8 +58,9 @@ class ThemesLoader extends Object implements Subscriber
 		$themes = [];
 		foreach (Finder::findFiles("*theme.neon")->from($this->themesDir) as $path => $file) {
 			$neon = Neon::decode(\file_get_contents($path));
-			$aDir = \dirname($path) . DS;
-			$themes[$neon["name"]] = new Theme($neon, $aDir);
+			$aDir = dirname($path) . DIRECTORY_SEPARATOR;
+			$rDir = str_replace($this->rootDir, NULL, $aDir);
+			$themes[$neon["name"]] = new Theme($neon, $aDir, $rDir);
 
 		}
 
@@ -162,9 +167,9 @@ class ThemesLoader extends Object implements Subscriber
 
 	private function formatTemplateFilePath($templateFile, $presenterName = NULL)
 	{
-		$base = $this->activeTheme->getPath() . DS . "templates" . DS;
+		$base = $this->activeTheme->getPath() . DIRECTORY_SEPARATOR . "templates" . DIRECTORY_SEPARATOR;
 		if ($presenterName) {
-			return $base . $presenterName . DS . $templateFile . ".latte";
+			return $base . $presenterName . DIRECTORY_SEPARATOR . $templateFile . ".latte";
 		} else {
 			return $base . $templateFile . ".latte";
 		}
@@ -204,7 +209,7 @@ class ThemesLoader extends Object implements Subscriber
 			return;
 		}
 
-		$path = $this->activeTheme->getPath() . "templates" . DS . "components" . DS . $fileName;
+		$path = $this->activeTheme->getPath() . "templates" . DIRECTORY_SEPARATOR . "components" . DIRECTORY_SEPARATOR . $fileName;
 		if (file_exists($path)) {
 			$template->setFile($path);
 		}

@@ -27,7 +27,7 @@ class ThemesLoaderTest extends TestCase
 	public function setUp()
 	{
 		parent::setUp();
-		$this->themesLoader = new ThemesLoader(ROOT_DIR . '/Themes/data/themes');
+		$this->themesLoader = new ThemesLoader(ROOT_DIR . '/Themes/data/themes', ROOT_DIR);
 		$this->flattyTheme = new Theme(
 			[
 				'name' => 'Flatty',
@@ -44,7 +44,8 @@ class ThemesLoaderTest extends TestCase
 						'version' => 3,
 					],
 				],
-			], ROOT_DIR . '/Themes/data/themes/Flatty/'
+			], ROOT_DIR . '/Themes/data/themes/Flatty/',
+			'/Themes/data/themes/Flatty/'
 		);
 	}
 

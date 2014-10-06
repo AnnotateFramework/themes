@@ -36,7 +36,8 @@ class ThemeTest extends TestCase
 						'version' => '3',
 					],
 				],
-			], ROOT_DIR . '/data/themes/Flatty/'
+			], ROOT_DIR . '/data/themes/Flatty/',
+			'/data/themes/Flatty/'
 		);
 	}
 
