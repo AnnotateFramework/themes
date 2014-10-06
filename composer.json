@@ -18,6 +18,7 @@
         "nette/bootstrap": "@dev",
         "nette/http": "@dev",
         "nette/security": "@dev",
+        "nette/mail": "@dev",
         "nette/application": "@dev",
         "latte/latte": "@dev",
         "tracy/tracy": "@dev",

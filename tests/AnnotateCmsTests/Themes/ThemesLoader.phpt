@@ -129,7 +129,7 @@ class ThemesLoaderTest extends TestCase
 		$this->themesLoader->onLoadLayout($templateFactory, '@layout.latte', 'TestPresenter');
 
 		$this->themesLoader->onLoadComponentTemplate($template, 'mainPanel.latte');
-		$file = $template;
+		$file = $template->getFile();
 
 		Assert::true(empty($file));
 	}
@@ -144,7 +144,7 @@ class ThemesLoaderTest extends TestCase
 
 		Assert::equal(
 			ROOT_DIR . '/Themes/data/themes/Flatty/templates/components/mainPanel.latte',
-			$template
+			$template->getFile()
 		);
 	}
 
@@ -154,10 +154,7 @@ class ThemesLoaderTest extends TestCase
 	 */
 	private function createTemplate()
 	{
-		$filters = [];
-		$latte = new Engine();
-
-		return new Template([], $filters, $latte, 'template');
+		return new Template(new Engine);
 	}
 
 }
