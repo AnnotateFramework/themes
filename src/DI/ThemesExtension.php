@@ -26,7 +26,7 @@ class ThemesExtension extends CompilerExtension
 	public function  getDefaults()
 	{
 		return [
-			'directory' => '%appDir%/app/addons/themes/',
+			'directory' => '%appDir%/addons/themes/',
 			'frontend'  => '',
 			'backend'   => '',
 		];
