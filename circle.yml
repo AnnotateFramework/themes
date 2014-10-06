@@ -1,8 +1,0 @@
-machine:
-    php:
-        version: 5.5.11
-test:
-  override:
-    - php tests/lint.php src/ tests/AnnotateCmsTests/
-    - VERBOSE=true
-    - ./tests/run-tests.sh -s tests/AnnotateCmsTests/
