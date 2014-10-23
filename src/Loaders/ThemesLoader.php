@@ -12,6 +12,7 @@ use Nette\Bridges\ApplicationLatte\Template;
 use Nette\Neon\Neon;
 use Nette\Object;
 use Nette\Utils\Finder;
+use Nette\Utils\Json;
 use Tracy\Dumper;
 
 
@@ -30,6 +31,7 @@ class ThemesLoader extends Object implements Subscriber
 	private $frontendTheme;
 
 	private $backendTheme;
+	const KEY_BOWER = '__bower__';
 
 	/** @var  Theme */
 	private $activeTheme;
@@ -60,6 +62,22 @@ class ThemesLoader extends Object implements Subscriber
 			$neon = Neon::decode(\file_get_contents($path));
 			$aDir = dirname($path) . DIRECTORY_SEPARATOR;
 			$rDir = str_replace($this->rootDir, NULL, $aDir);
+			$bowerFile = dirname($path) . '/bower.json';
+			$bowerData = [];
+			if (file_exists($bowerFile)) {
+				$bowerData = Json::decode(file_get_contents($bowerFile), Json::FORCE_ARRAY);
+			}
+
+			if ($neon === self::KEY_BOWER || $neon === NULL) {
+				$neon = $bowerData;
+			} else {
+				foreach ($neon as $key => $value) {
+					if ($value === self::KEY_BOWER) {
+						$neon[$key] = $bowerData[$key];
+					}
+				}
+			}
+
 			$themes[$neon["name"]] = new Theme($neon, $aDir, $rDir);
 
 		}
