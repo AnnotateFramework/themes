@@ -10,8 +10,6 @@ class Theme
 		"name"         => NULL,
 		"version"      => NULL,
 		"author"       => NULL,
-		"scripts"      => [],
-		"styles"       => [],
 		"dependencies" => [],
 	];
 
@@ -47,18 +45,6 @@ class Theme
 	public function getAuthor()
 	{
 		return $this->definition["author"];
-	}
-
-
-	public function getScripts()
-	{
-		return $this->definition["scripts"];
-	}
-
-
-	public function getStyles()
-	{
-		return $this->definition["styles"];
 	}
 
 
