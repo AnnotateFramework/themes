@@ -23,6 +23,7 @@ class ThemesLoader extends Object implements Subscriber
 {
 
 	const CLASSNAME = __CLASS__;
+	const KEY_BOWER = '__bower__';
 
 	public $onActivateTheme = [];
 
@@ -31,9 +32,8 @@ class ThemesLoader extends Object implements Subscriber
 	private $frontendTheme;
 
 	private $backendTheme;
-	const KEY_BOWER = '__bower__';
 
-	/** @var  Theme */
+	/** @var Theme */
 	private $activeTheme;
 
 	/** @var string */
@@ -58,7 +58,7 @@ class ThemesLoader extends Object implements Subscriber
 		}
 
 		$themes = [];
-		foreach (Finder::findFiles("*theme.neon")->from($this->themesDir) as $path => $file) {
+		foreach (Finder::findFiles('*theme.neon')->from($this->themesDir) as $path => $file) {
 			$neon = Neon::decode(\file_get_contents($path));
 			$aDir = dirname($path) . DIRECTORY_SEPARATOR;
 			$rDir = str_replace($this->rootDir, NULL, $aDir);
@@ -78,7 +78,7 @@ class ThemesLoader extends Object implements Subscriber
 				}
 			}
 
-			$themes[$neon["name"]] = new Theme($neon, $aDir, $rDir);
+			$themes[$neon['name']] = new Theme($neon, $aDir, $rDir);
 
 		}
 
@@ -111,26 +111,26 @@ class ThemesLoader extends Object implements Subscriber
 		if (isset($this->themes[$name])) {
 			return $this->themes[$name];
 		}
-		throw new ThemeNotFoundException("Theme '$name' not found");
+		throw new ThemeNotFoundException('Theme "' . $name . '" not found');
 	}
 
 
 	private function addDebugSection()
 	{
 		$theme = [
-			"name" => $this->activeTheme->getName(),
-			"version" => $this->activeTheme->getVersion(),
-			"dependencies" => $this->activeTheme->getDependencies(),
+			'name' => $this->activeTheme->getName(),
+			'version' => $this->activeTheme->getVersion(),
+			'dependencies' => $this->activeTheme->getDependencies(),
 		];
 		CmsPanel::$sections[] = function () use ($theme) {
-			$html = "<h2>Loaded Theme:</h2>";
-			$html .= "<div><table>";
-			$html .= "<thead><tr><th>Name</th><th>Version</th><th>Deps</th></tr></thead>";
-			$html .= "<tr><td>" . $theme["name"] . "</td><td>" . $theme["version"] . "</td><td>" . Dumper::toHtml(
-					$theme["dependencies"],
+			$html = '<h2>Loaded Theme:</h2>';
+			$html .= '<div><table>';
+			$html .= '<thead><tr><th>Name</th><th>Version</th><th>Deps</th></tr></thead>';
+			$html .= '<tr><td>' . $theme['name'] . '</td><td>' . $theme['version'] . '</td><td>' . Dumper::toHtml(
+					$theme['dependencies'],
 					[Dumper::COLLAPSE => TRUE]
-				) . "</td></tr>";
-			$html .= "</table></div>";
+				) . '</td></tr>';
+			$html .= '</table></div>';
 
 			return $html;
 		};
@@ -163,7 +163,7 @@ class ThemesLoader extends Object implements Subscriber
 			return;
 		}
 		$template->theme = $this->activeTheme;
-		$template->themeDir = $template->basePath . "/" . $this->activeTheme->getRelativePath();
+		$template->themeDir = $template->basePath . '/' . $this->activeTheme->getRelativePath();
 	}
 
 
@@ -185,12 +185,11 @@ class ThemesLoader extends Object implements Subscriber
 
 	private function formatTemplateFilePath($templateFile, $presenterName = NULL)
 	{
-		$base = $this->activeTheme->getPath() . DIRECTORY_SEPARATOR . "templates" . DIRECTORY_SEPARATOR;
+		$base = $this->activeTheme->getPath() . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR;
 		if ($presenterName) {
-			return $base . $presenterName . DIRECTORY_SEPARATOR . $templateFile . ".latte";
-		} else {
-			return $base . $templateFile . ".latte";
+			return $base . $presenterName . DIRECTORY_SEPARATOR . $templateFile . '.latte';
 		}
+		return $base . $templateFile . '.latte';
 	}
 
 
@@ -217,7 +216,7 @@ class ThemesLoader extends Object implements Subscriber
 
 	/**
 	 * @param           $fileName
-	 * @param Template  $template
+	 * @param Template $template
 	 *
 	 * TODO: Remove and use only onLoadComponentTemplate method
 	 */
@@ -227,7 +226,7 @@ class ThemesLoader extends Object implements Subscriber
 			return;
 		}
 
-		$path = $this->activeTheme->getPath() . "templates" . DIRECTORY_SEPARATOR . "components" . DIRECTORY_SEPARATOR . $fileName;
+		$path = $this->activeTheme->getPath() . 'templates' . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . $fileName;
 		if (file_exists($path)) {
 			$template->setFile($path);
 		}

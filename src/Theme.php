@@ -7,10 +7,10 @@ class Theme
 {
 
 	private $defaultDefinition = [
-		"name"         => NULL,
-		"version"      => NULL,
-		"author"       => NULL,
-		"dependencies" => [],
+		'name' => NULL,
+		'version' => NULL,
+		'author' => NULL,
+		'dependencies' => [],
 	];
 
 	private $definition;
@@ -32,19 +32,19 @@ class Theme
 
 	public function getName()
 	{
-		return $this->definition["name"];
+		return $this->definition['name'];
 	}
 
 
 	public function getVersion()
 	{
-		return $this->definition["version"];
+		return $this->definition['version'];
 	}
 
 
 	public function getAuthor()
 	{
-		return $this->definition["author"];
+		return $this->definition['author'];
 	}
 
 
@@ -62,19 +62,19 @@ class Theme
 
 	public function getDependencies()
 	{
-		return $this->definition["dependencies"];
+		return $this->definition['dependencies'];
 	}
 
 
 	public function hasDependencies()
 	{
-		return !empty($this->definition["dependencies"]);
+		return !empty($this->definition['dependencies']);
 	}
 
 
 	public function getRelativePath()
 	{
-		return \str_replace("\\", "/", $this->rDir);
+		return \str_replace('\\', '/', $this->rDir);
 	}
 
 
