@@ -216,7 +216,7 @@ class ThemesLoader extends Object implements Subscriber
 
 	/**
 	 * @param           $fileName
-	 * @param Template $template
+	 * @param Template  $template
 	 *
 	 * TODO: Remove and use only onLoadComponentTemplate method
 	 */

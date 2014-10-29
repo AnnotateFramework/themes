@@ -10,7 +10,6 @@ use Tester\Assert;
 require_once __DIR__ . '/../bootstrap.php';
 
 
-
 class ThemeTest extends TestCase
 {
 
@@ -22,15 +21,9 @@ class ThemeTest extends TestCase
 	{
 		$this->theme = new Theme(
 			[
-				'name'         => 'Flatty',
-				'version'      => 0.1,
-				'author'       => 'Michal Vyšinský',
-				'scripts'      => [
-					'@js/flatty.js',
-				],
-				'styles'       => [
-					'@css/flatty.css',
-				],
+				'name' => 'Flatty',
+				'version' => 0.1,
+				'author' => 'Michal Vyšinský',
 				'dependencies' => [
 					'TwitterBootstrap' => [
 						'version' => '3',
@@ -57,28 +50,6 @@ class ThemeTest extends TestCase
 	public function testThemeReturnsItsAuthor()
 	{
 		Assert::same('Michal Vyšinský', $this->theme->getAuthor());
-	}
-
-
-	public function testThemeReturnsItsScripts()
-	{
-		Assert::same(
-			[
-				'@js/flatty.js',
-			],
-			$this->theme->getScripts()
-		);
-	}
-
-
-	public function testThemeReturnsItsStyles()
-	{
-		Assert::same(
-			[
-				'@css/flatty.css',
-			],
-			$this->theme->getStyles()
-		);
 	}
 
 
@@ -116,7 +87,6 @@ class ThemeTest extends TestCase
 	}
 
 }
-
 
 
 \run(new ThemeTest);

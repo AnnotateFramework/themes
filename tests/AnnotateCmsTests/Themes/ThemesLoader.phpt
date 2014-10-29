@@ -13,7 +13,6 @@ use Tester\Assert;
 require_once __DIR__ . '/../bootstrap.php';
 
 
-
 class ThemesLoaderTest extends TestCase
 {
 
@@ -27,25 +26,19 @@ class ThemesLoaderTest extends TestCase
 	public function setUp()
 	{
 		parent::setUp();
-		$this->themesLoader = new ThemesLoader(ROOT_DIR . '/Themes/data/themes', ROOT_DIR);
+		$this->themesLoader = new ThemesLoader(ROOT_DIR . DIRECTORY_SEPARATOR . 'Themes' . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'themes', ROOT_DIR);
 		$this->flattyTheme = new Theme(
 			[
 				'name' => 'Flatty',
 				'version' => 0.1,
 				'author' => 'Michal Vyšinský',
-				'scripts' => [
-					'@js/flatty.js',
-				],
-				'styles' => [
-					'@css/flatty.css',
-				],
 				'dependencies' => [
 					'TwitterBootstrap' => [
 						'version' => 3,
 					],
 				],
-			], ROOT_DIR . '/Themes/data/themes/Flatty/',
-			'/Themes/data/themes/Flatty/'
+			], ROOT_DIR . DIRECTORY_SEPARATOR . 'Themes' . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'themes' . DIRECTORY_SEPARATOR . 'Flatty' . DIRECTORY_SEPARATOR,
+			DIRECTORY_SEPARATOR . 'Themes' . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'themes' . DIRECTORY_SEPARATOR . 'Flatty' . DIRECTORY_SEPARATOR
 		);
 	}
 
@@ -144,7 +137,7 @@ class ThemesLoaderTest extends TestCase
 		$this->themesLoader->onLoadComponentTemplate($template, 'mainPanel.latte');
 
 		Assert::equal(
-			ROOT_DIR . '/Themes/data/themes/Flatty/templates/components/mainPanel.latte',
+			ROOT_DIR . DIRECTORY_SEPARATOR . 'Themes' . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'themes' . DIRECTORY_SEPARATOR . 'Flatty' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'mainPanel.latte',
 			$template->getFile()
 		);
 	}
@@ -159,7 +152,6 @@ class ThemesLoaderTest extends TestCase
 	}
 
 }
-
 
 
 \run(new ThemesLoaderTest);

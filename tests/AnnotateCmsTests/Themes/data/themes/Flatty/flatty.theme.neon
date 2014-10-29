@@ -1,10 +1,6 @@
 name: Flatty
 version: 0.1
 author: Michal Vyšinský
-styles:
-	- @css/flatty.css
-scripts:
-	- @js/flatty.js
 dependencies:
 	TwitterBootstrap:
 		version: 3

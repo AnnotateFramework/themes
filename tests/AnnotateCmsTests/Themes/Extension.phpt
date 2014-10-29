@@ -11,7 +11,6 @@ use Tester\Assert;
 require_once __DIR__ . '/../bootstrap.php';
 
 
-
 class ExtensionTest extends Tester\TestCase
 {
 
@@ -38,7 +37,6 @@ class ExtensionTest extends Tester\TestCase
 	}
 
 }
-
 
 
 \run(new ExtensionTest);
