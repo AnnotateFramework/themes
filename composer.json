@@ -11,26 +11,23 @@
     ],
     "require": {
         "php": ">=5.4",
-        "annotatecms/extensions-installer": "@dev",
-        "annotatecms/diagnostics": "@dev",
-        "annotatecms/templating": "@dev",
-        "annotatecms/events": "@dev",
-        "nette/bootstrap": "@dev",
-        "nette/http": "@dev",
-        "nette/security": "@dev",
-        "nette/mail": "@dev",
-        "nette/application": "@dev",
-        "latte/latte": "@dev",
-        "tracy/tracy": "@dev",
-        "nette/safe-stream": "@dev",
-        "nette/caching": "@dev"
+        "annotatecms/extensions-installer": "~1.0.0",
+        "annotatecms/diagnostics": "~1.0.0",
+        "annotatecms/templating": "~1.0.0",
+        "annotatecms/events": "~1.0.0",
+        "nette/bootstrap": "~2.2.0",
+        "nette/http": "~2.2.0",
+        "nette/security": "~2.2.0",
+        "nette/mail": "~2.2.0",
+        "nette/application": "~2.2.0",
+        "latte/latte": "~2.2.0",
+        "tracy/tracy": "~2.2.0",
+        "nette/safe-stream": "~2.2.0",
+        "nette/caching": "~2.2.0"
     },
     "require-dev": {
         "nette/tester": "@dev",
         "janmarek/mockista": "@dev"
-    },
-    "suggest": {
-        "annotatecms/packages": "Load themes dependencies automatically with packages package"
     },
     "autoload": {
         "psr-4": {
