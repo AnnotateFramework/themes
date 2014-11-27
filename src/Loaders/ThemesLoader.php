@@ -86,6 +86,13 @@ class ThemesLoader extends Object implements Subscriber
 	}
 
 
+	public function setThemesDir($themesDir)
+	{
+		$this->themesDir = $themesDir;
+		$this->themes = $this->load();
+	}
+
+
 	public function setFrontendTheme($name)
 	{
 		$this->frontendTheme = $name;
