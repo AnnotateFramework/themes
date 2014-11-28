@@ -54,7 +54,7 @@ class ThemesLoader extends Object implements Subscriber
 	private function load()
 	{
 		if (!is_dir($this->themesDir)) {
-			throw new Exception('Themes directory "' . $this->themesDir . '" not found.');
+			return NULL;
 		}
 
 		$themes = [];
