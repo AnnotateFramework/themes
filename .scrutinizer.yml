@@ -1,0 +1,6 @@
+before_commands:
+  - composer install
+
+tools:
+  php_code_sniffer:
+    command: vendor/bin/phpcs --standard=vendor/dotblue/codesniffer-ruleset/DotBlue/ruleset.xml

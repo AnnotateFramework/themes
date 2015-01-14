@@ -9,6 +9,12 @@
       "email": "vysinsky@live.com"
     }
   ],
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "git@github.com:dotblue/codesniffer-ruleset.git"
+    }
+  ],
   "require": {
     "php": ">=5.4",
     "annotate/extensions-installer": "~2.0.0",
@@ -27,7 +33,9 @@
   },
   "require-dev": {
     "nette/tester": "@dev",
-    "janmarek/mockista": "@dev"
+    "janmarek/mockista": "@dev",
+    "squizlabs/php_codesniffer": "~2.1",
+    "dotblue/codesniffer-ruleset": "@dev"
   },
   "autoload": {
     "psr-4": {
