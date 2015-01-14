@@ -11,9 +11,9 @@
   ],
   "require": {
     "php": ">=5.4",
-    "annotate/extensions-installer": "~1.0.0",
-    "annotate/diagnostics": "~1.0.0",
-    "annotate/templating": "~1.0.0",
+    "annotate/extensions-installer": "~2.0.0",
+    "annotate/diagnostics": "~2.0.0",
+    "annotate/templating": "~2.0.0",
     "annotate/events": "~1.0.0",
     "nette/bootstrap": "~2.2.0",
     "nette/http": "~2.2.0",

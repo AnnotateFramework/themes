@@ -12,7 +12,7 @@ Note: this works when annotate/sandbox is installed
 
 Run:
 
-    composer require annotate/themes:@dev
+    composer require annotate/themes:~2.0
 
 Configure
 ---------
