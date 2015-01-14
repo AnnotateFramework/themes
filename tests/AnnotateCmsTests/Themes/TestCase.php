@@ -1,6 +1,6 @@
 <?php
 
-namespace AnnotateCmsTests\Themes;
+namespace AnnotateTests\Themes;
 
 use Tester;
 
@@ -14,10 +14,12 @@ class TestCase extends Tester\TestCase
 	protected $mockista;
 
 
+
 	protected function setUp()
 	{
 		$this->mockista = new \Mockista\Registry;
 	}
+
 
 
 	protected function tearDown()

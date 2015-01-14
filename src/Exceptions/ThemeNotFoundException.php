@@ -1,6 +1,6 @@
 <?php
 
-namespace AnnotateCms\Themes\Exceptions;
+namespace Annotate\Themes\Exceptions;
 
 use Exception;
 

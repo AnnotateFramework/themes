@@ -1,41 +1,41 @@
 {
-    "name": "annotatecms/themes",
-    "type": "annotatecms-extension",
-    "description": "Themes support for AnnotateCms framework",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Michal Vyšinský",
-            "email": "vysinsky@live.com"
-        }
-    ],
-    "require": {
-        "php": ">=5.4",
-        "annotatecms/extensions-installer": "~1.0.0",
-        "annotatecms/diagnostics": "~1.0.0",
-        "annotatecms/templating": "~1.0.0",
-        "annotatecms/events": "~1.0.0",
-        "nette/bootstrap": "~2.2.0",
-        "nette/http": "~2.2.0",
-        "nette/security": "~2.2.0",
-        "nette/mail": "~2.2.0",
-        "nette/application": "~2.2.0",
-        "latte/latte": "~2.2.0",
-        "tracy/tracy": "~2.2.0",
-        "nette/safe-stream": "~2.2.0",
-        "nette/caching": "~2.2.0"
-    },
-    "require-dev": {
-        "nette/tester": "@dev",
-        "janmarek/mockista": "@dev"
-    },
-    "autoload": {
-        "psr-4": {
-            "AnnotateCms\\Themes\\": "src/"
-        }
-    },
-    "extra": {
-        "extension-name": "themes",
-        "extension-class": "AnnotateCms\\Themes\\DI\\ThemesExtension"
+  "name": "annotate/themes",
+  "type": "annotate-extension",
+  "description": "Themes support for Annotate Framework",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Michal Vyšinský",
+      "email": "vysinsky@live.com"
     }
+  ],
+  "require": {
+    "php": ">=5.4",
+    "annotate/extensions-installer": "~1.0.0",
+    "annotate/diagnostics": "~1.0.0",
+    "annotate/templating": "~1.0.0",
+    "annotate/events": "~1.0.0",
+    "nette/bootstrap": "~2.2.0",
+    "nette/http": "~2.2.0",
+    "nette/security": "~2.2.0",
+    "nette/mail": "~2.2.0",
+    "nette/application": "~2.2.0",
+    "latte/latte": "~2.2.0",
+    "tracy/tracy": "~2.2.0",
+    "nette/safe-stream": "~2.2.0",
+    "nette/caching": "~2.2.0"
+  },
+  "require-dev": {
+    "nette/tester": "@dev",
+    "janmarek/mockista": "@dev"
+  },
+  "autoload": {
+    "psr-4": {
+      "Annotate\\Themes\\": "src/"
+    }
+  },
+  "extra": {
+    "extension-name": "themes",
+    "extension-class": "Annotate\\Themes\\DI\\ThemesExtension"
+  }
 }

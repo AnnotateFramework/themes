@@ -1,5 +1,5 @@
 extensions:
-    themes: AnnotateCms\Themes\DI\ThemesExtension
+    themes: Annotate\Themes\DI\ThemesExtension
 
 themes:
     directory: %appDir%/data/themes

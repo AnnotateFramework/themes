@@ -1,18 +1,18 @@
-[![Build Status](https://travis-ci.org/annotatecms/themes.svg)](https://travis-ci.org/annotatecms/themes)
+[![Build Status](https://travis-ci.org/AnnotateFramework/themes.svg)](https://travis-ci.org/AnnotateFramework/themes)
 
-Themes package for AnnotateCms
-==============================
+Themes package for Annotate Framework
+=====================================
 
 This package provides powerfull themes support. You can create theme and override every template in theme.
 
 Installation
 ------------
 
-Note: this works when annotatecms/sandbox is installed
+Note: this works when annotate/sandbox is installed
 
 Run:
 
-    composer require annotatecms/themes:@dev
+    composer require annotate/themes:@dev
 
 Configure
 ---------
@@ -30,7 +30,7 @@ Now edit any of your presenters:
 
     class FrontendPresenter extends BasePresenter
     {
-        /** @var AnnotateCms\Themes\Loaders\ThemesLoader @inject */
+        /** @var Annotate\Themes\Loaders\ThemesLoader @inject */
         public $themesLoader;
     
         public function startup()
@@ -43,12 +43,12 @@ Now edit any of your presenters:
 Hint!
 -----
 
-For the best possible experience use annotatecms/packages package with annotatecms/themes
+For the best possible experience use annotate/packages package with annotate/themes
     
 Uninstall
 ---------
 
-Just remove line with `annotatecms/themes` from composer.json and run `composer update`
+Just remove line with `annotate/themes` from composer.json and run `composer update`
 
 Remove `themes` section from `app/config/app.neon` file
 Remove injection from your presenters and code added on installation.

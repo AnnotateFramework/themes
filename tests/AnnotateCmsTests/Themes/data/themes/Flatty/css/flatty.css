@@ -16,8 +16,8 @@ body {
     position: fixed;
     right: 10px;
     bottom: 0;
-    font-size: 8pt;
     font-style: italic;
+    font-size: 8pt;
 }
 
 #main-panel {
@@ -47,8 +47,8 @@ body {
 }
 
 #main-panel .container {
-    width: 90%;
     padding: 0;
+    width: 90%;
 }
 
 #main-panel .container > a, #main-panel .container #right-panel > a {
@@ -62,16 +62,16 @@ body {
 
 #main-panel #brand {
     color: white;
-    font-size: 20px;
-    font-weight: lighter;
     text-decoration: none;
+    font-weight: lighter;
+    font-size: 20px;
     line-height: 40px;
 }
 
 #main-panel #brand img {
     position: relative;
-    height: 35px;
     top: -2px;
+    height: 35px;
 }
 
 #main-panel #right-panel {

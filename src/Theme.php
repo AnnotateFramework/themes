@@ -1,6 +1,6 @@
 <?php
 
-namespace AnnotateCms\Themes;
+namespace Annotate\Themes;
 
 
 class Theme
@@ -22,6 +22,7 @@ class Theme
 	private $checked = FALSE;
 
 
+
 	function __construct($def, $aDir, $rDir)
 	{
 		$this->definition = array_merge($this->defaultDefinition, $def);
@@ -30,10 +31,12 @@ class Theme
 	}
 
 
+
 	public function getName()
 	{
 		return $this->definition['name'];
 	}
+
 
 
 	public function getVersion()
@@ -42,10 +45,12 @@ class Theme
 	}
 
 
+
 	public function getAuthor()
 	{
 		return $this->definition['author'];
 	}
+
 
 
 	public function isChecked()
@@ -54,10 +59,12 @@ class Theme
 	}
 
 
+
 	public function setChecked()
 	{
 		$this->checked = TRUE;
 	}
+
 
 
 	public function getDependencies()
@@ -66,16 +73,19 @@ class Theme
 	}
 
 
+
 	public function hasDependencies()
 	{
 		return !empty($this->definition['dependencies']);
 	}
 
 
+
 	public function getRelativePath()
 	{
 		return str_replace(DIRECTORY_SEPARATOR, '/', $this->rDir);
 	}
+
 
 
 	public function getPath()

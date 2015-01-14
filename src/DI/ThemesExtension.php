@@ -1,9 +1,9 @@
 <?php
 
-namespace AnnotateCms\Themes\DI;
+namespace Annotate\Themes\DI;
 
 
-use AnnotateCms\Themes\Loaders\ThemesLoader;
+use Annotate\Themes\Loaders\ThemesLoader;
 use Kdyby\Events\DI\EventsExtension;
 use Nette\DI\CompilerExtension;
 
@@ -25,6 +25,7 @@ class ThemesExtension extends CompilerExtension
 			->addSetup('setFrontendTheme', ['name' => $configuration['frontend']])
 			->addSetup('setBackendTheme', ['name' => $configuration['backend']]);
 	}
+
 
 
 	public function  getDefaults()

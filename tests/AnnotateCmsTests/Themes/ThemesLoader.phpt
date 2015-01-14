@@ -1,9 +1,9 @@
 <?php
 
-namespace AnnotateCmsTests\Themes;
+namespace AnnotateTests\Themes;
 
-use AnnotateCms\Themes\Loaders\ThemesLoader;
-use AnnotateCms\Themes\Theme;
+use Annotate\Themes\Loaders\ThemesLoader;
+use Annotate\Themes\Theme;
 use Latte\Engine;
 use Nette\Bridges\ApplicationLatte\Template;
 use Tester;
@@ -21,6 +21,7 @@ class ThemesLoaderTest extends TestCase
 
 
 	private $flattyTheme;
+
 
 
 	public function setUp()
@@ -43,17 +44,19 @@ class ThemesLoaderTest extends TestCase
 	}
 
 
+
 	public function testItListensCorrectEvents()
 	{
 		$events = [
-			'AnnotateCms\Templating\TemplateFactory::onSetupTemplate',
-			'AnnotateCms\Templating\TemplateFactory::onLoadTemplate',
-			'AnnotateCms\Templating\TemplateFactory::onLoadLayout',
-			'AnnotateCms\Templating\TemplateFactory::onCreateFormTemplate',
-			'AnnotateCms\Templating\TemplateFactory::onLoadComponentTemplate',
+			'Annotate\Templating\TemplateFactory::onSetupTemplate',
+			'Annotate\Templating\TemplateFactory::onLoadTemplate',
+			'Annotate\Templating\TemplateFactory::onLoadLayout',
+			'Annotate\Templating\TemplateFactory::onCreateFormTemplate',
+			'Annotate\Templating\TemplateFactory::onLoadComponentTemplate',
 		];
 		Assert::equal($events, $this->themesLoader->getSubscribedEvents());
 	}
+
 
 
 	public function testItLoadsFrontendTheme()
@@ -64,12 +67,14 @@ class ThemesLoaderTest extends TestCase
 	}
 
 
+
 	public function testItLoadsBackendTheme()
 	{
 		$this->themesLoader->setBackendTheme('Flatty');
 		$this->themesLoader->activateBackendTheme();
 		Assert::equal($this->flattyTheme, $this->themesLoader->getActiveTheme());
 	}
+
 
 
 	public function testItThrowsExceptionOnUnknownTheme()
@@ -79,9 +84,10 @@ class ThemesLoaderTest extends TestCase
 				$this->themesLoader->setFrontendTheme('Unknown');
 				$this->themesLoader->activateFrontendTheme();
 			},
-			'AnnotateCms\\Themes\\Exceptions\\ThemeNotFoundException'
+			'Annotate\\Themes\\Exceptions\\ThemeNotFoundException'
 		);
 	}
+
 
 
 	public function testItAddsPropertiesToTemplate()
@@ -97,14 +103,16 @@ class ThemesLoaderTest extends TestCase
 	}
 
 
+
 	public function testItAddsLayouts()
 	{
 		$this->themesLoader->setFrontendTheme('Flatty');
 		$this->themesLoader->activateFrontendTheme();
-		$templateFactory = $this->mockista->create('AnnotateCms\\Templating\\ITemplateFactory');
+		$templateFactory = $this->mockista->create('Annotate\\Templating\\ITemplateFactory');
 		$templateFactory->expects('addLayout')->twice();
 		$this->themesLoader->onLoadLayout($templateFactory, '@layout.latte', 'TestPresenter');
 	}
+
 
 
 	public function testItDoesNothingWhenNoThemeIsSet()
@@ -115,7 +123,7 @@ class ThemesLoaderTest extends TestCase
 		Assert::false(isset($template->theme));
 		Assert::false(isset($template->themeDir));
 
-		$templateFactory = $this->mockista->create('\AnnotateCms\Templating\ITemplateFactory');
+		$templateFactory = $this->mockista->create('\Annotate\Templating\ITemplateFactory');
 		$templateFactory->expects('addTemplate')->exactly(0);
 		$this->themesLoader->onLoadTemplate($templateFactory, 'template.latte', 'TestPresenter');
 
@@ -127,6 +135,7 @@ class ThemesLoaderTest extends TestCase
 
 		Assert::true(empty($file));
 	}
+
 
 
 	public function testItLoadsComponentsTemplate()
@@ -141,6 +150,7 @@ class ThemesLoaderTest extends TestCase
 			$template->getFile()
 		);
 	}
+
 
 
 	/**

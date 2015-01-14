@@ -10,8 +10,8 @@
  */
 
 $parseOptions = function () use ($_SERVER) {
-	$options = array('quiet' => FALSE, 'files' => array());
-	foreach (array_keys(getopt('qh', array('quiet', 'help'))) as $arg) {
+	$options = ['quiet' => FALSE, 'files' => []];
+	foreach (array_keys(getopt('qh', ['quiet', 'help'])) as $arg) {
 		switch ($arg) {
 			case 'q':
 			case 'quiet':
@@ -106,7 +106,7 @@ $check = function ($path) use (&$check, &$lintFile, &$context) {
 
 $context = $parseOptions();
 $context['filesCount'] = 0;
-$context['errors'] = array();
+$context['errors'] = [];
 foreach ($context['files'] as $file) {
 	$check($file);
 }

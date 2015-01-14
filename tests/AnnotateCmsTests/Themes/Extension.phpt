@@ -1,8 +1,8 @@
 <?php
 
-namespace AnnotateCmsTests\Themes;
+namespace AnnotateTests\Themes;
 
-use AnnotateCms\Themes\Loaders\ThemesLoader;
+use Annotate\Themes\Loaders\ThemesLoader;
 use Nette;
 use Tester;
 use Tester\Assert;
@@ -20,11 +20,13 @@ class ExtensionTest extends Tester\TestCase
 	}
 
 
+
 	public function testFunctional()
 	{
 		$container = $this->createContainer();
 		Assert::true($container->getService('themes.themeLoader') instanceof ThemesLoader);
 	}
+
 
 
 	private function createContainer()

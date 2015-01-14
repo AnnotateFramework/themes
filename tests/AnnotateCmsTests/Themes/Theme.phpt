@@ -1,8 +1,8 @@
 <?php
 
-namespace AnnotateCmsTests\Themes;
+namespace AnnotateTests\Themes;
 
-use AnnotateCms\Themes\Theme;
+use Annotate\Themes\Theme;
 use Tester;
 use Tester\Assert;
 
@@ -15,6 +15,7 @@ class ThemeTest extends TestCase
 
 	/** @var  Theme */
 	private $theme;
+
 
 
 	public function setUp()
@@ -35,10 +36,12 @@ class ThemeTest extends TestCase
 	}
 
 
+
 	public function testThemeReturnsItsName()
 	{
 		Assert::same('Flatty', $this->theme->getName());
 	}
+
 
 
 	public function testThemeReturnsItsVersion()
@@ -47,10 +50,12 @@ class ThemeTest extends TestCase
 	}
 
 
+
 	public function testThemeReturnsItsAuthor()
 	{
 		Assert::same('Michal Vyšinský', $this->theme->getAuthor());
 	}
+
 
 
 	public function testThemeReturnsItsDependencies()
@@ -67,16 +72,19 @@ class ThemeTest extends TestCase
 	}
 
 
+
 	public function testThemeReturnsItsPath()
 	{
 		Assert::same(ROOT_DIR . '/data/themes/Flatty/', $this->theme->getPath());
 	}
 
 
+
 	public function testThemeReturnsItsRelativePath()
 	{
 		Assert::same('/data/themes/Flatty/', $this->theme->getRelativePath());
 	}
+
 
 
 	public function testCheckWorks()

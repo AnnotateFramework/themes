@@ -1,12 +1,11 @@
 <?php
 
-namespace AnnotateCms\Themes\Loaders;
+namespace Annotate\Themes\Loaders;
 
-use AnnotateCms\Diagnostics\CmsPanel;
-use AnnotateCms\Templating\ITemplateFactory;
-use AnnotateCms\Themes\Exceptions\ThemeNotFoundException;
-use AnnotateCms\Themes\Theme;
-use Exception;
+use Annotate\Diagnostics\CmsPanel;
+use Annotate\Templating\ITemplateFactory;
+use Annotate\Themes\Exceptions\ThemeNotFoundException;
+use Annotate\Themes\Theme;
 use Kdyby\Events\Subscriber;
 use Nette\Bridges\ApplicationLatte\Template;
 use Nette\Neon\Neon;
@@ -43,12 +42,14 @@ class ThemesLoader extends Object implements Subscriber
 	private $rootDir;
 
 
+
 	public function __construct($themesDir, $rootDir)
 	{
 		$this->themesDir = $themesDir;
 		$this->rootDir = $rootDir;
 		$this->themes = $this->load();
 	}
+
 
 
 	private function load()
@@ -86,11 +87,13 @@ class ThemesLoader extends Object implements Subscriber
 	}
 
 
+
 	public function setThemesDir($themesDir)
 	{
 		$this->themesDir = $themesDir;
 		$this->themes = $this->load();
 	}
+
 
 
 	public function setFrontendTheme($name)
@@ -99,10 +102,12 @@ class ThemesLoader extends Object implements Subscriber
 	}
 
 
+
 	public function setBackendTheme($name)
 	{
 		$this->backendTheme = $name;
 	}
+
 
 
 	public function activateFrontendTheme()
@@ -113,6 +118,7 @@ class ThemesLoader extends Object implements Subscriber
 	}
 
 
+
 	private function getTheme($name)
 	{
 		if (isset($this->themes[$name])) {
@@ -120,6 +126,7 @@ class ThemesLoader extends Object implements Subscriber
 		}
 		throw new ThemeNotFoundException('Theme "' . $name . '" not found');
 	}
+
 
 
 	private function addDebugSection()
@@ -144,6 +151,7 @@ class ThemesLoader extends Object implements Subscriber
 	}
 
 
+
 	public function activateBackendTheme()
 	{
 		$this->activeTheme = $this->getTheme($this->backendTheme);
@@ -152,16 +160,18 @@ class ThemesLoader extends Object implements Subscriber
 	}
 
 
+
 	public function getSubscribedEvents()
 	{
 		return [
-			'AnnotateCms\Templating\TemplateFactory::onSetupTemplate',
-			'AnnotateCms\Templating\TemplateFactory::onLoadTemplate',
-			'AnnotateCms\Templating\TemplateFactory::onLoadLayout',
-			'AnnotateCms\Templating\TemplateFactory::onCreateFormTemplate',
-			'AnnotateCms\Templating\TemplateFactory::onLoadComponentTemplate',
+			'Annotate\Templating\TemplateFactory::onSetupTemplate',
+			'Annotate\Templating\TemplateFactory::onLoadTemplate',
+			'Annotate\Templating\TemplateFactory::onLoadLayout',
+			'Annotate\Templating\TemplateFactory::onCreateFormTemplate',
+			'Annotate\Templating\TemplateFactory::onLoadComponentTemplate',
 		];
 	}
+
 
 
 	public function onSetupTemplate(Template $template)
@@ -172,6 +182,7 @@ class ThemesLoader extends Object implements Subscriber
 		$template->theme = $this->activeTheme;
 		$template->themeDir = $template->basePath . '/' . $this->activeTheme->getRelativePath();
 	}
+
 
 
 	public function onLoadTemplate(ITemplateFactory $templateFactory, $templateFile, $presenterName)
@@ -190,6 +201,7 @@ class ThemesLoader extends Object implements Subscriber
 	}
 
 
+
 	private function formatTemplateFilePath($templateFile, $presenterName = NULL)
 	{
 		$base = $this->activeTheme->getPath() . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR;
@@ -198,6 +210,7 @@ class ThemesLoader extends Object implements Subscriber
 		}
 		return $base . $templateFile . '.latte';
 	}
+
 
 
 	public function onLoadLayout(ITemplateFactory $templateFactory, $layoutFile, $presenterName)
@@ -215,15 +228,17 @@ class ThemesLoader extends Object implements Subscriber
 	}
 
 
+
 	public function onLoadComponentTemplate(Template $template, $fileName)
 	{
 		$this->onCreateFormTemplate($fileName, $template);
 	}
 
 
+
 	/**
 	 * @param           $fileName
-	 * @param Template  $template
+	 * @param Template $template
 	 *
 	 * TODO: Remove and use only onLoadComponentTemplate method
 	 */
@@ -238,6 +253,7 @@ class ThemesLoader extends Object implements Subscriber
 			$template->setFile($path);
 		}
 	}
+
 
 
 	/**
