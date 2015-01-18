@@ -1,0 +1,6 @@
+filter:
+  excluded_paths: [vendor/*, tests/*]
+
+tools:
+  php_code_sniffer:
+    command: composer install && vendor/bin/phpcs src --standard=vendor/dotblue/codesniffer-ruleset/DotBlue/ruleset.xml && rm vendor -rf
