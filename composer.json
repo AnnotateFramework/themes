@@ -17,22 +17,19 @@
   ],
   "require": {
     "php": ">=5.4",
-    "annotate/extensions-installer": "~2.0.0",
-    "annotate/diagnostics": "~2.0.0",
-    "annotate/templating": "~2.0.0",
-    "annotate/events": "~1.0.0",
-    "nette/bootstrap": "~2.2.0",
-    "nette/http": "~2.2.0",
-    "nette/security": "~2.2.0",
-    "nette/mail": "~2.2.0",
-    "nette/application": "~2.2.0",
-    "latte/latte": "~2.2.0",
-    "tracy/tracy": "~2.2.0",
-    "nette/safe-stream": "~2.2.0",
-    "nette/caching": "~2.2.0"
+    "annotate/diagnostics": "@dev",
+    "annotate/templating": "@dev",
+    "annotate/events": "@dev",
+    "tracy/tracy": "~2.3.0",
+    "nette/bootstrap": "~2.3.0",
+    "nette/di": "~2.3.0",
+    "nette/finder": "~2.3.0",
+    "nette/application": "~2.3.0",
+    "nette/robot-loader": "~2.3.0"
   },
   "require-dev": {
     "nette/tester": "@dev",
+    "latte/latte": "~2.3.0",
     "janmarek/mockista": "@dev",
     "squizlabs/php_codesniffer": "~2.1",
     "dotblue/codesniffer-ruleset": "@dev"
@@ -41,9 +38,5 @@
     "psr-4": {
       "Annotate\\Themes\\": "src/"
     }
-  },
-  "extra": {
-    "extension-name": "themes",
-    "extension-class": "Annotate\\Themes\\DI\\ThemesExtension"
   }
 }
