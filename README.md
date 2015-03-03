@@ -14,11 +14,18 @@ This package provides powerfull themes support. You can create theme and overrid
 Installation
 ------------
 
-Note: this works when annotate/sandbox is installed
+Require this extension by [Composer](http://getcomposer.org)
 
-Run:
+```sh
+$ composer require annotate/themes:@dev
+```
 
-    composer require annotate/themes:~2.0
+Register extension into configuration:
+
+```yml
+extensions:
+    themes: Annotate\Themes\DI\ThemesExtension
+```
 
 Configure
 ---------
