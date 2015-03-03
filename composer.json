@@ -19,7 +19,7 @@
     "php": ">=5.4",
     "annotate/diagnostics": "@dev",
     "annotate/templating": "@dev",
-    "annotate/events": "@dev",
+    "kdyby/events": "~2.3.0",
     "tracy/tracy": "~2.3.0",
     "nette/bootstrap": "~2.3.0",
     "nette/di": "~2.3.0",
