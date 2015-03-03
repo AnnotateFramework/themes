@@ -1,6 +1,6 @@
 {
   "name": "annotate/themes",
-  "type": "annotate-extension",
+  "type": "library",
   "description": "Themes support for Annotate Framework",
   "license": "MIT",
   "authors": [
