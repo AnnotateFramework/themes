@@ -51,7 +51,7 @@ class ThemesLoaderTest extends TestCase
 			'Annotate\Templating\TemplateFactory::onSetupTemplate',
 			'Annotate\Templating\TemplateFactory::onLoadTemplate',
 			'Annotate\Templating\TemplateFactory::onLoadLayout',
-			'Annotate\Templating\TemplateFactory::onCreateFormTemplate',
+			'Annotate\Templating\TemplateFactory::onCreateFormTemplate' => 'onLoadComponentTemplate',
 			'Annotate\Templating\TemplateFactory::onLoadComponentTemplate',
 		];
 		Assert::equal($events, $this->themesLoader->getSubscribedEvents());
