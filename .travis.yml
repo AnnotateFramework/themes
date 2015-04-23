@@ -15,7 +15,6 @@ before_install:
   - composer self-update
 
 before_script:
-  - composer self-update
   - composer install --no-interaction --prefer-source --dev
   - vendor/bin/parallel-lint --exclude vendor .
   - vendor/bin/phpcs src --standard=vendor/dotblue/codesniffer-ruleset/DotBlue/ruleset.xml
