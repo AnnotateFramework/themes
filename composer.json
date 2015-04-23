@@ -34,7 +34,8 @@
     "dotblue/codesniffer-ruleset": "@dev",
     "jakub-onderka/php-parallel-lint": "0.*",
     "jakub-onderka/php-console-highlighter": "0.*",
-    "phpspec/prophecy": "~1.4"
+    "phpspec/prophecy": "~1.4",
+    "codeclimate/php-test-reporter": "@dev"
   },
   "autoload": {
     "psr-4": {
