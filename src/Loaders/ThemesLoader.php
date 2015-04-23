@@ -21,16 +21,11 @@ use Tracy\Dumper;
 class ThemesLoader extends Object implements Subscriber
 {
 
-	const CLASSNAME = __CLASS__;
 	const KEY_BOWER = '__bower__';
 
 	public $onActivateTheme = [];
 
 	private $themes = [];
-
-	private $frontendTheme;
-
-	private $backendTheme;
 
 	/** @var Theme */
 	private $activeTheme;
@@ -96,23 +91,9 @@ class ThemesLoader extends Object implements Subscriber
 
 
 
-	public function setFrontendTheme($name)
+	public function activateTheme($themeName)
 	{
-		$this->frontendTheme = $name;
-	}
-
-
-
-	public function setBackendTheme($name)
-	{
-		$this->backendTheme = $name;
-	}
-
-
-
-	public function activateFrontendTheme()
-	{
-		$this->activeTheme = $this->getTheme($this->frontendTheme);
+		$this->activeTheme = $this->getTheme($themeName);
 		$this->onActivateTheme($this->activeTheme);
 		$this->addDebugSection();
 	}
@@ -148,15 +129,6 @@ class ThemesLoader extends Object implements Subscriber
 
 			return $html;
 		};
-	}
-
-
-
-	public function activateBackendTheme()
-	{
-		$this->activeTheme = $this->getTheme($this->backendTheme);
-		$this->onActivateTheme($this->activeTheme);
-		$this->addDebugSection();
 	}
 
 

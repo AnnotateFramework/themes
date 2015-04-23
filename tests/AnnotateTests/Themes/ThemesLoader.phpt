@@ -59,19 +59,9 @@ class ThemesLoaderTest extends TestCase
 
 
 
-	public function testItLoadsFrontendTheme()
+	public function testItLoadsTheme()
 	{
-		$this->themesLoader->setFrontendTheme('Flatty');
-		$this->themesLoader->activateFrontendTheme();
-		Assert::equal($this->flattyTheme, $this->themesLoader->getActiveTheme());
-	}
-
-
-
-	public function testItLoadsBackendTheme()
-	{
-		$this->themesLoader->setBackendTheme('Flatty');
-		$this->themesLoader->activateBackendTheme();
+		$this->themesLoader->activateTheme('Flatty');
 		Assert::equal($this->flattyTheme, $this->themesLoader->getActiveTheme());
 	}
 
@@ -81,8 +71,7 @@ class ThemesLoaderTest extends TestCase
 	{
 		Assert::exception(
 			function () {
-				$this->themesLoader->setFrontendTheme('Unknown');
-				$this->themesLoader->activateFrontendTheme();
+				$this->themesLoader->activateTheme('Unknown');
 			},
 			'Annotate\\Themes\\Exceptions\\ThemeNotFoundException'
 		);
@@ -94,8 +83,7 @@ class ThemesLoaderTest extends TestCase
 	{
 		$template = $this->createTemplate();
 		$template->basePath = '/fake/base/path';
-		$this->themesLoader->setFrontendTheme('Flatty');
-		$this->themesLoader->activateFrontendTheme();
+		$this->themesLoader->activateTheme('Flatty');
 		$this->themesLoader->onSetupTemplate($template);
 
 		Assert::true(isset($template->theme));
@@ -106,8 +94,7 @@ class ThemesLoaderTest extends TestCase
 
 	public function testItAddsLayouts()
 	{
-		$this->themesLoader->setFrontendTheme('Flatty');
-		$this->themesLoader->activateFrontendTheme();
+		$this->themesLoader->activateTheme('Flatty');
 		$templateFactory = $this->mockista->create('Annotate\\Templating\\ITemplateFactory');
 		$templateFactory->expects('addLayout')->twice();
 		$this->themesLoader->onLoadLayout($templateFactory, '@layout.latte', 'TestPresenter');
@@ -140,8 +127,7 @@ class ThemesLoaderTest extends TestCase
 
 	public function testItLoadsComponentsTemplate()
 	{
-		$this->themesLoader->setFrontendTheme('Flatty');
-		$this->themesLoader->activateFrontendTheme();
+		$this->themesLoader->activateTheme('Flatty');
 		$template = $this->createTemplate();
 		$this->themesLoader->onLoadComponentTemplate($template, 'mainPanel.latte');
 

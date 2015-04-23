@@ -17,13 +17,11 @@ class ThemesExtension extends CompilerExtension
 
 		$builder = $this->getContainerBuilder();
 		$builder->addDefinition($this->prefix('themeLoader'))
-			->setClass(ThemesLoader::CLASSNAME, [
+			->setClass(ThemesLoader::class, [
 				'themesDir' => $configuration['directory'],
 				'rootDir' => $builder->expand('%appDir%') . '/../',
 			])
-			->addTag(EventsExtension::TAG_SUBSCRIBER)
-			->addSetup('setFrontendTheme', ['name' => $configuration['frontend']])
-			->addSetup('setBackendTheme', ['name' => $configuration['backend']]);
+			->addTag(EventsExtension::TAG_SUBSCRIBER);
 	}
 
 
@@ -32,8 +30,6 @@ class ThemesExtension extends CompilerExtension
 	{
 		return [
 			'directory' => '%appDir%/addons/themes/',
-			'frontend' => '',
-			'backend' => '',
 		];
 	}
 
