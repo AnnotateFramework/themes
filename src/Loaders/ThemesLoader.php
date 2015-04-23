@@ -11,7 +11,6 @@ use Nette\Bridges\ApplicationLatte\Template;
 use Nette\Neon\Neon;
 use Nette\Object;
 use Nette\Utils\Finder;
-use Nette\Utils\Json;
 use Tracy\Dumper;
 
 
@@ -53,29 +52,27 @@ class ThemesLoader extends Object implements Subscriber
 			return NULL;
 		}
 
+		/** @var Theme[] $themes */
 		$themes = [];
 		foreach (Finder::findFiles('*theme.neon')->from($this->themesDir) as $path => $file) {
-			$neon = Neon::decode(\file_get_contents($path));
+			$neon = Neon::decode(file_get_contents($path));
 			$aDir = dirname($path) . DIRECTORY_SEPARATOR;
 			$rDir = str_replace($this->rootDir, NULL, $aDir);
-			$bowerFile = dirname($path) . '/bower.json';
-			$bowerData = [];
-			if (file_exists($bowerFile)) {
-				$bowerData = Json::decode(file_get_contents($bowerFile), Json::FORCE_ARRAY);
+			$theme = new Theme($neon, $aDir, $rDir);
+
+			if (isset($neon['extends'])) {
+				$theme->setParent($neon['extends']);
 			}
 
-			if ($neon === self::KEY_BOWER || $neon === NULL) {
-				$neon = $bowerData;
-			} else {
-				foreach ($neon as $key => $value) {
-					if ($value === self::KEY_BOWER) {
-						$neon[$key] = $bowerData[$key];
-					}
-				}
+			$themes[$neon['name']] = $theme;
+		}
+
+		/** @var Theme $theme */
+		foreach ($themes as $name => $theme) {
+			$parent = $theme->getParent();
+			if ($parent) {
+				$theme->addDependencies($themes[$parent]->getDependencies());
 			}
-
-			$themes[$neon['name']] = new Theme($neon, $aDir, $rDir);
-
 		}
 
 		return $themes;
@@ -100,6 +97,11 @@ class ThemesLoader extends Object implements Subscriber
 
 
 
+	/**
+	 * @param  string
+	 * @return Theme
+	 * @throws ThemeNotFoundException
+	 */
 	private function getTheme($name)
 	{
 		if (isset($this->themes[$name])) {
@@ -159,24 +161,31 @@ class ThemesLoader extends Object implements Subscriber
 
 	public function onLoadTemplate(ITemplateFactory $templateFactory, $templateFile, $presenterName)
 	{
-
 		if (!$this->activeTheme) {
 			return;
 		}
-
 		$templateFactory->addTemplate(
-			$this->formatTemplateFilePath($templateFile, $presenterName)
+			$this->formatTemplateFilePath($this->activeTheme, $templateFile, $presenterName)
 		);
 		$templateFactory->addTemplate(
-			$this->formatTemplateFilePath($templateFile)
+			$this->formatTemplateFilePath($this->activeTheme, $templateFile)
+		);
+
+		$parent = $this->activeTheme->getParent();
+		$parentTheme = $this->getTheme($parent);
+		$templateFactory->addTemplate(
+			$this->formatTemplateFilePath($parentTheme, $templateFile, $presenterName)
+		);
+		$templateFactory->addTemplate(
+			$this->formatTemplateFilePath($parentTheme, $templateFile)
 		);
 	}
 
 
 
-	private function formatTemplateFilePath($templateFile, $presenterName = NULL)
+	private function formatTemplateFilePath(Theme $theme, $templateFile, $presenterName = NULL)
 	{
-		$base = $this->activeTheme->getPath() . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR;
+		$base = $theme->getPath() . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR;
 		if ($presenterName) {
 			return $base . $presenterName . DIRECTORY_SEPARATOR . $templateFile . '.latte';
 		}
@@ -192,10 +201,19 @@ class ThemesLoader extends Object implements Subscriber
 		}
 
 		$templateFactory->addLayout(
-			$this->formatTemplateFilePath($layoutFile, $presenterName)
+			$this->formatTemplateFilePath($this->activeTheme, $layoutFile, $presenterName)
 		);
 		$templateFactory->addLayout(
-			$this->formatTemplateFilePath($layoutFile)
+			$this->formatTemplateFilePath($this->activeTheme, $layoutFile)
+		);
+
+		$parent = $this->activeTheme->getParent();
+		$parentTheme = $this->getTheme($parent);
+		$templateFactory->addLayout(
+			$this->formatTemplateFilePath($parentTheme, $layoutFile, $presenterName)
+		);
+		$templateFactory->addLayout(
+			$this->formatTemplateFilePath($parentTheme, $layoutFile)
 		);
 	}
 
@@ -223,6 +241,12 @@ class ThemesLoader extends Object implements Subscriber
 		$path = $this->activeTheme->getPath() . 'templates' . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . $fileName;
 		if (file_exists($path)) {
 			$template->setFile($path);
+		} elseif ($parent = $this->activeTheme->getParent()) {
+			$parentTheme = $this->getTheme($parent);
+			$path = $parentTheme->getPath() . 'templates' . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . $fileName;
+			if (file_exists($path)) {
+				$template->setFile($path);
+			}
 		}
 	}
 

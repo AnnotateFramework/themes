@@ -21,9 +21,12 @@ class Theme
 
 	private $checked = FALSE;
 
+	/** @var string */
+	private $parent;
 
 
-	function __construct($def, $aDir, $rDir)
+
+	public function __construct($def, $aDir, $rDir)
 	{
 		$this->definition = array_merge($this->defaultDefinition, $def);
 		$this->aDir = $aDir;
@@ -91,6 +94,30 @@ class Theme
 	public function getPath()
 	{
 		return $this->aDir;
+	}
+
+
+
+	public function setParent($parent)
+	{
+		$this->parent = $parent;
+	}
+
+
+
+	/**
+	 * @return string
+	 */
+	public function getParent()
+	{
+		return $this->parent;
+	}
+
+
+
+	public function addDependencies(array $dependencies)
+	{
+		$this->definition['dependencies'] = array_merge($this->definition['dependencies'], $dependencies);
 	}
 
 }
