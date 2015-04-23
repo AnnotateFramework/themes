@@ -172,6 +172,9 @@ class ThemesLoader extends Object implements Subscriber
 		);
 
 		$parent = $this->activeTheme->getParent();
+		if (!$parent) {
+			return;
+		}
 		$parentTheme = $this->getTheme($parent);
 		$templateFactory->addTemplate(
 			$this->formatTemplateFilePath($parentTheme, $templateFile, $presenterName)
@@ -208,6 +211,9 @@ class ThemesLoader extends Object implements Subscriber
 		);
 
 		$parent = $this->activeTheme->getParent();
+		if (!$parent) {
+			return;
+		}
 		$parentTheme = $this->getTheme($parent);
 		$templateFactory->addLayout(
 			$this->formatTemplateFilePath($parentTheme, $layoutFile, $presenterName)
