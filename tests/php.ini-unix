@@ -1,3 +1,0 @@
-extension = json.so
-zend_extension = xdebug.so
-date.timezone = Europe/Prague

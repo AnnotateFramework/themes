@@ -1,6 +1,0 @@
-name: Flatty
-version: 0.1
-author: Michal Vyšinský
-dependencies:
-	TwitterBootstrap:
-		version: 3

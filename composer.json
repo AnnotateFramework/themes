@@ -30,9 +30,11 @@
   "require-dev": {
     "nette/tester": "@dev",
     "latte/latte": "~2.3.0",
-    "janmarek/mockista": "@dev",
     "squizlabs/php_codesniffer": "~2.1",
-    "dotblue/codesniffer-ruleset": "@dev"
+    "dotblue/codesniffer-ruleset": "@dev",
+    "jakub-onderka/php-parallel-lint": "0.*",
+    "jakub-onderka/php-console-highlighter": "0.*",
+    "phpspec/prophecy": "~1.4"
   },
   "autoload": {
     "psr-4": {

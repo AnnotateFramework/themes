@@ -1,0 +1,6 @@
+name: foo
+version: 0.1
+author: John Doe
+dependencies:
+	package:
+		version: 2.0
