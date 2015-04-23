@@ -141,7 +141,7 @@ class ThemesLoader extends Object implements Subscriber
 			'Annotate\Templating\TemplateFactory::onSetupTemplate',
 			'Annotate\Templating\TemplateFactory::onLoadTemplate',
 			'Annotate\Templating\TemplateFactory::onLoadLayout',
-			'Annotate\Templating\TemplateFactory::onCreateFormTemplate',
+			'Annotate\Templating\TemplateFactory::onCreateFormTemplate' => 'onLoadComponentTemplate',
 			'Annotate\Templating\TemplateFactory::onLoadComponentTemplate',
 		];
 	}
@@ -220,19 +220,6 @@ class ThemesLoader extends Object implements Subscriber
 
 
 	public function onLoadComponentTemplate(Template $template, $fileName)
-	{
-		$this->onCreateFormTemplate($fileName, $template);
-	}
-
-
-
-	/**
-	 * @param           $fileName
-	 * @param Template $template
-	 *
-	 * TODO: Remove and use only onLoadComponentTemplate method
-	 */
-	public function onCreateFormTemplate($fileName, Template $template)
 	{
 		if (!$this->activeTheme) {
 			return;
