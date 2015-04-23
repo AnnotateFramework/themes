@@ -30,7 +30,7 @@
   "require-dev": {
     "nette/tester": "@dev",
     "latte/latte": "~2.3.0",
-    "squizlabs/php_codesniffer": "~2.1",
+    "squizlabs/php_codesniffer": "~2.3",
     "dotblue/codesniffer-ruleset": "@dev",
     "jakub-onderka/php-parallel-lint": "0.*",
     "jakub-onderka/php-console-highlighter": "0.*",
