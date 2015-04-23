@@ -16,7 +16,7 @@
     }
   ],
   "require": {
-    "php": ">=5.4",
+    "php": ">=5.5",
     "annotate/diagnostics": "@dev",
     "annotate/templating": "@dev",
     "kdyby/events": "~2.3.0",
