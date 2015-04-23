@@ -2,7 +2,6 @@
 
 namespace Annotate\Themes\DI;
 
-
 use Annotate\Themes\Loaders\ThemesLoader;
 use Kdyby\Events\DI\EventsExtension;
 use Nette\DI\CompilerExtension;
@@ -26,7 +25,7 @@ class ThemesExtension extends CompilerExtension
 
 
 
-	public function  getDefaults()
+	public function getDefaults()
 	{
 		return [
 			'directory' => '%appDir%/addons/themes/',

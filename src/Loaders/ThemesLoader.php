@@ -14,16 +14,15 @@ use Nette\Utils\Finder;
 use Tracy\Dumper;
 
 
-/**
- * @method onActivateTheme(Theme $activeTheme)
- */
 class ThemesLoader extends Object implements Subscriber
 {
 
 	const KEY_BOWER = '__bower__';
 
+	/** @var callable[] */
 	public $onActivateTheme = [];
 
+	/** @var Theme[] */
 	private $themes = [];
 
 	/** @var Theme */
@@ -37,6 +36,10 @@ class ThemesLoader extends Object implements Subscriber
 
 
 
+	/**
+	 * @param  string
+	 * @param  string
+	 */
 	public function __construct($themesDir, $rootDir)
 	{
 		$this->themesDir = $themesDir;
@@ -46,6 +49,9 @@ class ThemesLoader extends Object implements Subscriber
 
 
 
+	/**
+	 * @return Theme[]
+	 */
 	private function load()
 	{
 		if (!is_dir($this->themesDir)) {
@@ -80,6 +86,9 @@ class ThemesLoader extends Object implements Subscriber
 
 
 
+	/**
+	 * @param  string
+	 */
 	public function setThemesDir($themesDir)
 	{
 		$this->themesDir = $themesDir;
@@ -88,6 +97,9 @@ class ThemesLoader extends Object implements Subscriber
 
 
 
+	/**
+	 * @param  string
+	 */
 	public function activateTheme($themeName)
 	{
 		$this->activeTheme = $this->getTheme($themeName);
@@ -148,6 +160,11 @@ class ThemesLoader extends Object implements Subscriber
 
 
 
+	/**
+	 * Event handler method - should not be called manually
+	 * @internal
+	 * @param  Template
+	 */
 	public function onSetupTemplate(Template $template)
 	{
 		if (!$this->activeTheme) {
@@ -159,6 +176,13 @@ class ThemesLoader extends Object implements Subscriber
 
 
 
+	/**
+	 * Event handler method - should not be called manually
+	 * @internal
+	 * @param  ITemplateFactory
+	 * @param  string
+	 * @param  string
+	 */
 	public function onLoadTemplate(ITemplateFactory $templateFactory, $templateFile, $presenterName)
 	{
 		if (!$this->activeTheme) {
@@ -186,6 +210,12 @@ class ThemesLoader extends Object implements Subscriber
 
 
 
+	/**
+	 * @param  Theme
+	 * @param  string
+	 * @param  string|NULL
+	 * @return string
+	 */
 	private function formatTemplateFilePath(Theme $theme, $templateFile, $presenterName = NULL)
 	{
 		$base = $theme->getPath() . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR;
@@ -197,6 +227,13 @@ class ThemesLoader extends Object implements Subscriber
 
 
 
+	/**
+	 * Event handler method - should not be called manually
+	 * @internal
+	 * @param  ITemplateFactory
+	 * @param  string
+	 * @param  string
+	 */
 	public function onLoadLayout(ITemplateFactory $templateFactory, $layoutFile, $presenterName)
 	{
 		if (!$this->activeTheme) {
@@ -225,6 +262,12 @@ class ThemesLoader extends Object implements Subscriber
 
 
 
+	/**
+	 * Event handler method - should not be called manually
+	 * @internal
+	 * @param  Template
+	 * @param  string
+	 */
 	public function onLoadComponentTemplate(Template $template, $fileName)
 	{
 		if (!$this->activeTheme) {
