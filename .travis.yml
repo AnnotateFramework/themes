@@ -17,7 +17,7 @@ before_install:
 before_script:
   - composer install --no-interaction --prefer-source --dev
   - vendor/bin/parallel-lint --exclude vendor .
-  - vendor/bin/phpcs src --standard=vendor/dotblue/codesniffer-ruleset/DotBlue/ruleset.xml
+  - vendor/bin/phpcs src --standard=vendor/dotblue/codesniffer-ruleset/DotBlue/ruleset.xml -s
 
 script: vendor/bin/tester tests
 
