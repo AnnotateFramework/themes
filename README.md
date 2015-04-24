@@ -1,5 +1,7 @@
 [![Travis](https://img.shields.io/travis/AnnotateFramework/themes.svg?style=flat-square)](https://travis-ci.org/AnnotateFramework/themes)
-[![Scrutinizer](https://img.shields.io/scrutinizer/g/AnnotateFramework/themes.svg?style=flat-square)](https://scrutinizer-ci.com/g/AnnotateFramework/themes/)
+[![Code Climate](https://img.shields.io/codeclimate/github/AnnotateFramework/themes.svg?style=flat-square)](https://codeclimate.com/github/AnnotateFramework/themes)
+[![Code Climate](https://img.shields.io/codeclimate/coverage/github/AnnotateFramework/themes.svg?style=flat-square)](https://codeclimate.com/github/AnnotateFramework/themes)
+
 
 [![Packagist](https://img.shields.io/packagist/v/annotate/themes.svg?style=flat-square)](https://packagist.org/packages/annotate/themes)
 [![Packagist](https://img.shields.io/packagist/dm/annotate/themes.svg?style=flat-square)](https://packagist.org/packages/annotate/themes)
