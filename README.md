@@ -13,33 +13,36 @@ Themes package for Annotate Framework
 
 This package provides powerfull themes support. You can create theme and override every template in theme.
 
+Requirements
+------------
+
+Themes extension requires [annotate/templating](https://github.com/AnnotateFramework/templating). Register its extension to your neon config too.
+
 Installation
 ------------
 
 Require this extension by [Composer](http://getcomposer.org)
 
 ```sh
-$ composer require annotate/themes:@dev
+$ composer require annotate/themes:~2.1.0
 ```
 
 Register extension into configuration:
 
 ```yml
 extensions:
+    templating: Annotate\Templating\DI\TemplatingExtension
     themes: Annotate\Themes\DI\ThemesExtension
 ```
 
 Configure
 ---------
 
-Default themes are set to `Sandbox` for frontend and `Flatty` for backend. Both are provided in sandbox package.
-Themes path is also configurable via Neon. Default `directory` value is `%appDir%/app/addons/themes/`.
+Themes path is configurable via Neon. Default `directory` value is `%appDir%/app/addons/themes/`.
 To change themes open app/config/app.neon and add following configuration:
 
     themes:
         directory: %appDir%/app/
-        frontend: FrontendThemeName
-        backend: BackendThemeName
     
 Now edit any of your presenters:
 
@@ -51,19 +54,37 @@ Now edit any of your presenters:
         public function startup()
         {
             parent::startup();
-            $this->themesLoader->activateFrontendTheme(); // or activateBackendTheme()
+            $this->themesLoader->activateTheme('theme name');
         }
     }
     
-Hint!
------
+To have full functionality you have to either extend `Annotate\Framework\Application\BasePresenter` or copy its implementation to your `BasePresenter`
 
-For the best possible experience use annotate/packages package with annotate/themes
-    
-Uninstall
----------
+Create theme
+------------
 
-Just remove line with `annotate/themes` from composer.json and run `composer update`
+Create a file `theme_name.theme.neon` in themes directory with minimal structure:
 
-Remove `themes` section from `app/config/app.neon` file
-Remove injection from your presenters and code added on installation.
+
+```neon
+name: My theme
+```
+
+Inheritance
+-----------
+
+Themes support one level inheritance you can specify parent theme by `extends` option in neon file:
+
+```neon
+name: My theme
+extends: theme
+```
+
+Loading templates
+-----------------
+
+After activating theme app will search for template files this way:
+ 
+ 1. search for `%themeDir%/templates/%templateName`
+ 2. in case theme extends another theme it seaches for `%anotherThemeDir%/templates/%templateName%
+ 3. if no template was found above it searches for file in normal "Nette" way
