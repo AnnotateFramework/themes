@@ -46,19 +46,20 @@ To change themes open app/config/app.neon and add following configuration:
     
 Now edit any of your presenters:
 
-    class FrontendPresenter extends BasePresenter
-    {
-        /** @var Annotate\Themes\Loaders\ThemesLoader @inject */
-        public $themesLoader;
-    
-        public function startup()
-        {
-            parent::startup();
-            $this->themesLoader->activateTheme('theme name');
-        }
-    }
-    
-To have full functionality you have to either extend `Annotate\Framework\Application\BasePresenter` or copy its implementation to your `BasePresenter`
+	class FrontendPresenter extends Nette\Application\UI\Presenter
+	{
+	
+		use Annotate\Themes\ThemedPresenter;
+	
+		/** @var Annotate\Themes\Loaders\ThemesLoader @inject */
+		public $themesLoader;
+	
+		public function startup()
+		{
+			parent::startup();
+			$this->themesLoader->activateTheme('theme name');
+		}
+	}
 
 Create theme
 ------------
