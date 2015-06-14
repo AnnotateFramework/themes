@@ -17,8 +17,6 @@ use Tracy\Dumper;
 class ThemesLoader extends Object implements Subscriber
 {
 
-	const KEY_BOWER = '__bower__';
-
 	/** @var callable[] */
 	public $onActivateTheme = [];
 
