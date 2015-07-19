@@ -17,8 +17,8 @@
   ],
   "require": {
     "php": ">=5.5",
-    "annotate/diagnostics": "~2.0.0",
-    "annotate/templating": "~2.0.0",
+    "annotate/diagnostics": "@dev",
+    "annotate/templating": "@dev",
     "kdyby/events": "~2.3.0",
     "tracy/tracy": "~2.3.0",
     "nette/bootstrap": "~2.3.0",
