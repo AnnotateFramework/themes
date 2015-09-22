@@ -87,5 +87,5 @@ Loading templates
 After activating theme app will search for template files this way:
  
  1. search for `%themeDir%/templates/%templateName`
- 2. in case theme extends another theme it seaches for `%anotherThemeDir%/templates/%templateName%
+ 2. in case theme extends another theme it seaches for `%anotherThemeDir%/templates/%templateName%`
  3. if no template was found above it searches for file in normal "Nette" way
