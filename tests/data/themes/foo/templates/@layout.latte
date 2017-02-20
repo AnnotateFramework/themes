@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	{capture $html}
+	<title>Welcome to Annotate Framework!</title>
+</head>
+<body>
+
+<div id="main-content">
+	{include #content}
+</div>
+
+<p id="theme-info">Proudly powered by <strong>Annotate Framework</strong> | Theme: <strong>Flatty</strong> by <strong>Michal
+		Vyšinský</strong></p>
+{/capture}
+{default $styles = []}
+{foreach $styles as $style}
+	<link rel="stylesheet" href="{$style->getRelativePath($basePath)}"/>
+{/foreach}
+{$html|noescape}
+{default $scripts = []}
+{foreach $scripts as $script}
+	<script src="{$script->getRelativePath($basePath)}"></script>
+{/foreach}
+</body>
+</html>

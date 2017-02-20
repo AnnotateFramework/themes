@@ -1,0 +1,36 @@
+sudo: false
+
+language: php
+
+php:
+  - 5.6
+  - 7.0
+  - hhvm
+  - hhvm-nightly
+
+matrix:
+  allow_failures:
+    - php: 7.0
+    - php: hhvm
+    - php: hhvm-nightly
+
+before_install:
+  - composer self-update
+
+before_script:
+  - composer install --no-interaction --prefer-source --dev
+  - vendor/bin/parallel-lint --exclude vendor .
+  - vendor/bin/phpcs src --standard=vendor/dotblue/codesniffer-ruleset/DotBlue/ruleset.xml -s
+  - mkdir -p build/logs
+
+script: vendor/bin/tester tests -p php --coverage build/logs/clover.xml --coverage-src src -d extension=xdebug.so
+
+after_failure:
+  - 'for i in $(find ./tests -name \*.actual); do echo "--- $i"; cat $i; echo; echo; done'
+
+addons:
+  code_climate:
+    repo_token: $CODECLIMATE_REPO_TOKEN
+
+after_script:
+  - vendor/bin/test-reporter

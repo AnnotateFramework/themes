@@ -1,0 +1,14 @@
+<div id="main-panel">
+	<div class="container">
+		<a href="{plink #dashboard}" id="brand"><img src="{$themeDir}images/logo.png"> Annotate Framework</a>
+
+		<div class="pull-right" id="right-panel">
+			{foreach $links as $link}
+				<a href="{plink $link->url}" data-toggle="tooltip"
+				   title="{$link->title}" n:class="$presenter->isLinkCurrent('#'.$link->moduleUrl.':*') ? active">
+					<i class="{$link->icon}"></i>
+				</a>
+			{/foreach}
+		</div>
+	</div>
+</div>

@@ -1,0 +1,5 @@
+extensions:
+    themes: Annotate\Themes\DI\ThemesExtension
+
+themes:
+    directory: %appDir%/data/themes

@@ -1,0 +1,17 @@
+{define #link}
+	<li n:class="$presenter->isLinkCurrent($link->rawUrl) ? active">
+		<a href="{plink $link->url}"><i n:if="$link->icon" class="{$link->icon}"></i>{$link->text}</a>
+	</li>
+{if count($link->hasChildren())}
+	<ul>
+		{foreach $link->items as $sublink}
+			{include #link link => $sublink}
+		{/foreach}
+	</ul>
+{/if}
+{/define}
+<ul class="nav">
+	{foreach $links as $link}
+		{include #link link => $link}
+	{/foreach}
+</ul>
