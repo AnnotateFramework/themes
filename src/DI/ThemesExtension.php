@@ -18,7 +18,7 @@ class ThemesExtension extends CompilerExtension
 		$builder->addDefinition($this->prefix('themeLoader'))
 			->setClass(ThemesLoader::class, [
 				'themesDir' => $configuration['directory'],
-				'rootDir' => $builder->expand('%appDir%') . '/../',
+				'rootDir' => $configuration['rootDir'],
 			])
 			->addTag(EventsExtension::TAG_SUBSCRIBER);
 	}
@@ -29,6 +29,7 @@ class ThemesExtension extends CompilerExtension
 	{
 		return [
 			'directory' => '%appDir%/addons/themes/',
+            'rootDir' => '%appDir%/../'
 		];
 	}
 
